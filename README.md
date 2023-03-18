@@ -1,18 +1,9 @@
 # Ohjelmistotekniikka, harjoitustyö
 ## Viikko 1
 ### Linkitetyt tiedostot
+[gitlog.txt](laskarit/viikko1/gitlog.txt)
 
-### Tekstin muotoilun harjoittelua
-Gitin käyttö on tuntunut aluksi **tosi** vaikealta. _GitHub_ on sentään käyttöliittymältään tuttu, koska siihen on törmännyt monesti netin syövereissä. 
+[komentorivi.txt](laskarit/viikko1/komentorivi.txt)
 
-> Gitin käyttö on lopulta helppoa! 
-> Siihen tottuu kunhan tekee tarpeeksi monta kertaa virheitä =)
-
-Joopa joo. Sitä odotellessa...
-
-```
-git init
-git commit -m
-```
 
 
