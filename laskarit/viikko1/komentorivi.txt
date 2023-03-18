@@ -1,0 +1,26 @@
+kurssit
+└── ot2023
+    ├── gitk-kokeilu
+    │   └── Lapio-website
+    │       ├── aleksis_kivi.html
+    │       ├── assets
+    │       │   └── Seitsemän_veljestä.png
+    │       ├── index.html
+    │       ├── position.html
+    │       ├── seitseman_veljesta.html
+    │       ├── style.css
+    │       ├── styles.css
+    │       └── style_seitseman_veljesta.css
+    └── viikko1
+        └── unicafe
+            ├── poetry.lock
+            ├── pyproject.toml
+            └── src
+                ├── index.py
+                ├── kassapaate.py
+                ├── maksukortti.py
+                └── tests
+                    ├── __init__.py
+                    └── maksukortti_test.py
+
+8 directories, 15 files
