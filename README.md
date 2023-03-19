@@ -6,5 +6,3 @@
 [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
 
 Jatkoa seuraa...
-
-<Tässä on epäsynkrooniin johtava muutos>

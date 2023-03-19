@@ -1,5 +1,3 @@
-<Tässä on epäsynkrooniin johtava muutos githubista>
-
 commit 514430980524ae3f79cdd9c803433bea744003e9
 Author: Vesa Jolkkonen <vesa.jolkkonen@hotmail.com>
 Date:   Sat Mar 18 09:28:20 2023 +0200
