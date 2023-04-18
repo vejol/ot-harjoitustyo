@@ -14,6 +14,7 @@ Sovellus on suunniteltu Python-versiolla `3.8`. Vanhempien python-versioiden kan
 - [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](./dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
+- [Arkkitehtuurikuvaus](./dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 
