@@ -12,8 +12,24 @@ Aluksi sovelluksessa on ainoastaan yksi käyttäjä, _normaali käyttäjä_. My�
 
 ## Perusversion tarjoama toiminnallisuus
 
+### Käyttöliittymä
+
+Käyttöliittymässä on kolme näkymää:
+
+- Aloitusnäkymä (**tehty osittain**)
+- Pelinäkymä (**tehty osittain**)
+- Luo uusi peli -näkymä (**tehty osittain**)
+
 ### Uuden visailun luominen
 Käyttäjä voi luoda uuden visailun, jossa on käyttäjän valitsema määrä arvaustehtäviä. Käyttäjä valitsee jokaiseen tehtävään 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi tehtävän yhteyteen voi liittää muita lisätietoja, kuten kappaleen nimen, esittäjän tai julkaisuvuoden. Näitä tietoja ei kuitenkaan näytetä visailun aikana, vaan ne ovat ainoastaan käyttäjän omaan käyttöön.
+
+Teknisiä vaatimuksia visailun luomiselle:
+
+- Käyttäjä antaa visailulle nimen
+- Käyttäjä voi liittää visailuun haluamansa määrän arvaustehtäviä
+- Käyttäjä voi päättää arvaustehtävään piilotettavat sanat
+- Sovellus tarkistaa lopuksi, että mikään vaadituista kentistä ei ole tyhjänä
+- Visailu tallennetaan tietokantaan
 
 ### Tallennettujen visailujen selaileminen
 Käyttäjä voi katsoa järjestelmään tallennettujen visailujen tietoja.
@@ -22,18 +38,15 @@ Käyttäjä voi katsoa järjestelmään tallennettujen visailujen tietoja.
 - Käyttäjä voi käynnistää sovellukseen tallennetun visailun.
 - Sovellus näyttää tallennettuja tehtäviä yksi kerrallaan.
 - Käyttäjä voi klikata pelinäkymän luukkuja auki haluamassaan järjestyksessä.
-- Sovellus pitää kirjaa, kumman joukkueen vuoro on milloinkin
-- Sovellus pitää kirjaa pistetilanteesta
-
-### Pelin hallintapaneeli
-Sovellus tarjoaa pelinjohtajalle pelin ohjaamiseen tarvittavat painikkeet:
-- pisteiden lisäämiseen ja vähentämiseen
-- sen ilmaisemiseen, oliko joukkeen antama vastaus oikein vai väärin
-- vuoron vaihtamiseen
-- pelin päättämiseen
 
 ## Jatkokehitysideoita 
 Perusversion toteutuksen jälkeen sovellukseen on mahdollista lisätä ajan salliessa esimerkiksi seuraavia ominaisuuksia:
 - Käyttäjä voi muokata aiemmin tallennettuja visailuja
 - Visailuun voi liittää bonuskysymyksen, johon tehtävän ratkaissut joukkue saa yrittää vastata. Bonuskysymyksestä voi saada ylimääräisen pisteen
-- Pelin hallintapaneeli voidaan toteuttaa myös erillisessä ikkunassa
+
+### Pelin hallintapaneeli
+Sovellukseen voi toteuttaa pelinjohtajalle pelin ohjaamiseen tarvittavia painikkeita:
+- pisteiden lisäämiseen ja vähentämiseen
+- sen ilmaisemiseen, oliko joukkeen antama vastaus oikein vai väärin
+- vuoron vaihtamiseen
+- pelin päättämiseen
