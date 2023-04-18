@@ -44,7 +44,7 @@ poetry run invoke start
 Automaattiset testit suoritetaan komennolla:
 
 ```bash
-poetry run invoke start
+poetry run invoke test
 ```
 
 ### Testikattavuus
@@ -53,4 +53,12 @@ Html-muotoinen testikattavuusraportti luodaan komennolla:
 
 ```bash
 poetry run invoke coverage-report
+```
+
+### Pylint
+
+Tiedostossa .pylintrc määritellyt koodin laatutarkistukset suoritetaan komennolla:
+
+```bash
+poetry run invoke lint
 ```
