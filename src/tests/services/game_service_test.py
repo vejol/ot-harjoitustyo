@@ -18,4 +18,8 @@ class TestGameService(unittest.TestCase):
         self.game_service.change_turn()
         self.assertEqual(self.game_service.turn, 1)
 
+    def test_adding_point_to_team1_works(self):
+        self.game_service.add_point_team1()
+        self.assertEqual(self.game_service.team1_points, 1)
+
     
