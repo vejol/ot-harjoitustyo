@@ -30,7 +30,7 @@ class GameView:
 
         quit_button = ttk.Button(
             master=self._frame,
-            text="Quit",
+            text="Lopeta",
             command=self._quit_game
         )
 

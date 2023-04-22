@@ -21,13 +21,13 @@ class CreateQuizView:
 
         cancel_button = ttk.Button(
             master=self._frame,
-            text="Cancel",
+            text="Peruuta",
             command=self._handle_opening_view
         )
 
         save_button = ttk.Button(
             master=self._frame,
-            text="Save",
+            text="Tallenna",
             command=self._save_and_return
         )
 

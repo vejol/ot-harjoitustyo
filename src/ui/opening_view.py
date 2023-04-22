@@ -22,19 +22,19 @@ class OpeningView:
 
         start_game_button = ttk.Button(
             master=self._frame,
-            text="Start Game",
+            text="Aloita peli",
             command=self._handle_game_view
         )
 
         create_quiz_button = ttk.Button(
             master=self._frame,
-            text="Create New Quiz",
+            text="Luo uusi peli",
             command=self._handle_new_quiz_view
         )
 
         welcome_label = ttk.Label(
             master=self._frame, 
-            text="Welcome to Bumtsibum!",
+            text="Tervetuloa pelaamaan Bumtsibumia!",
             font=("Helvetica", 25)
         )
         
