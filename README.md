@@ -1,4 +1,4 @@
-# Bumtsibum-sovellus
+# Musiikkivisa-sovellus
 
 Sovellus on Bumtsibum-visailuohjelmaan perustuva peli, joka on suunnattu peruskoulun ja lukion musiikinopettajien käyttöön. Sovelluksessa opettaja voi luoda visailuja, joita voidaan sitten pelata oppilasryhmän kanssa. Oppilasryhmä jaetaan kahteen joukkueeseen ja opettaja toimii pelinjohtajana, joka tietää oikeat vastaukset ja jakaa pisteitä oman harkintansa mukaan.
 
@@ -18,13 +18,19 @@ Sovellus on suunniteltu Python-versiolla `3.8`. Vanhempien python-versioiden kan
 
 ## Asennus
 
-1. Tarvittavat riippuvuudet ennen suorittamista tulee asentaa komennolla:
+1. Tarvittavat riippuvuudet tulee asentaa ennen suorittamista komennolla:
 
 ```bash
 poetry install
 ```
 
-2. Sovellus käynnistetään komennolla:
+2. Tietokannan alustus tulee suorittaa ennen ensimmäistä käynnistyskertaa komennolla:
+
+```bash
+poetry run invoke build
+```
+
+3. Sovellus käynnistetään komennolla:
 
 ```bash
 poetry run invoke start
