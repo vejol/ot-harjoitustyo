@@ -1,9 +1,12 @@
 import unittest
 from services.game_service import GameService
+from entities.puzzle import Puzzle
+from entities.quiz import Quiz
 
 class TestGameService(unittest.TestCase):
 
     def setUp(self):
+        puzzle = Puzzle()
         self.game_service = GameService()
 
     def test_turn_default_value_is_1(self):
