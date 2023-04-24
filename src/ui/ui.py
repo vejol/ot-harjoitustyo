@@ -27,12 +27,13 @@ class UI:
 
         self._current_view.pack()
 
-    def _show_game_view(self):
+    def _show_game_view(self, quiz):
         self._hide_current_view()
 
         self._current_view = GameView(
             self._root,
-            self._show_opening_view
+            self._show_opening_view,
+            quiz
         )
         
         self._current_view.pack()
