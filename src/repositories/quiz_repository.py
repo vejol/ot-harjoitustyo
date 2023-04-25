@@ -18,7 +18,17 @@ class QuizRepository:
             "DELETE FROM Puzzles"
         )
 
-    def find_all_names(self):
+    def find_all_quizzes(self):
+        quiz_names = self.find_quiz_names()
+        
+        quizzes = {}
+        for name in quiz_names:
+            quizzes[name] = self.find_quiz(name)
+
+        return quizzes
+
+
+    def find_quiz_names(self):
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -26,8 +36,8 @@ class QuizRepository:
         )
 
         rows = cursor.fetchall()
-
         return [row["name"] for row in rows]
+
 
     def find_quiz(self, name):
 
@@ -71,7 +81,7 @@ class QuizRepository:
                                         word2, 
                                         word3, 
                                         word4, 
-                                        word5) 
+                                        word5)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
                 [puzzle.name,
                  count + 1,

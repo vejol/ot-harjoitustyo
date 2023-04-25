@@ -47,28 +47,6 @@ def initialize_database():
 
     drop_tables(connection)
     create_tables(connection)
-    insert_sample_quizzes(connection)
-
-
-def insert_sample_quizzes(connection):
-    cursor = connection.cursor()
-
-    cursor.execute('''
-        INSERT INTO Quizzes (name) VALUES ('Suomivisa');
-    ''')
-
-    cursor.execute('''
-        INSERT INTO Quizzes (name) VALUES ('Pop-visa');
-    ''')
-
-    cursor.execute('''
-        INSERT INTO Quizzes (name) VALUES ('Joululauluvisa');
-    ''')
-
-    cursor.execute('''
-        INSERT INTO Puzzles (name, order_no, quiz_id, word1, word2, word3, word4, word5)
-            VALUES ('Maamme-laulu (säv. F. Pacius)', 1, 1, 'laaksoa,', 'ei', 'kukkulaa,', 'ei', 'vettä');
-    ''')
 
     connection.commit()
 
