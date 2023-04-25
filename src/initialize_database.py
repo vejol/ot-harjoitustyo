@@ -30,7 +30,7 @@ def create_tables(connection):
             id INTEGER PRIMARY KEY,
             name TEXT,
             order_no INTEGER,
-            quizz_id INTEGER,
+            quiz_id INTEGER,
             word1 TEXT,
             word2 TEXT,
             word3 TEXT,
@@ -66,7 +66,7 @@ def insert_sample_quizzes(connection):
     ''')
 
     cursor.execute('''
-        INSERT INTO Puzzles (name, order_no, quizz_id, word1, word2, word3, word4, word5)
+        INSERT INTO Puzzles (name, order_no, quiz_id, word1, word2, word3, word4, word5)
             VALUES ('Maamme-laulu (säv. F. Pacius)', 1, 1, 'laaksoa,', 'ei', 'kukkulaa,', 'ei', 'vettä');
     ''')
 
