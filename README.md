@@ -6,6 +6,9 @@ Pelinäkymässä on viisi numeroitua luukkua, joiden jokaisen taakse on piilotet
 
 Jos joukkue ei keksi mitään laulua, jossa luukusta paljastunut sana esiintyisi, vuoro siirtyy toiselle joukkueelle. Jokaiseen tehtävään on piilotettu myös kaksi punaisella pohjalla olevaa sanaa, ja tällaisen luukun avaaminen siirtää myös vuoron toiselle joukkueelle.
 
+## Viikon 5 Release
+- Linkki [viikon 5 releaseen](https://github.com/vejol/ot-harjoitustyo.git/releases/latest)
+
 ## Python-versio
 
 Sovellus on suunniteltu Python-versiolla `3.8`. Vanhempien python-versioiden kanssa toimintaa ei voida taata.
