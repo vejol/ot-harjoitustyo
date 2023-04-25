@@ -6,8 +6,9 @@ from entities.quiz import Quiz
 class TestGameService(unittest.TestCase):
 
     def setUp(self):
-        puzzle = Puzzle()
-        self.game_service = GameService()
+        puzzle = Puzzle("Test Puzzle", ["one", "two", "three", "four", "five"], 1)
+        quiz = Quiz("Test Quiz", [puzzle])
+        self.game_service = GameService(quiz)
 
     def test_turn_default_value_is_1(self):
         self.assertEqual(self.game_service.turn, 1)
