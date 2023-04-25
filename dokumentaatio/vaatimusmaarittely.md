@@ -21,7 +21,7 @@ Käyttöliittymässä on kolme näkymää:
 - Luo uusi peli -näkymä (**tehty osittain**)
 
 ### Uuden visailun luominen
-Käyttäjä voi luoda uuden visailun, jossa on käyttäjän valitsema määrä arvaustehtäviä. Käyttäjä valitsee jokaiseen tehtävään 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi tehtävän yhteyteen voi liittää muita lisätietoja, kuten kappaleen nimen, esittäjän tai julkaisuvuoden. Näitä tietoja ei kuitenkaan näytetä visailun aikana, vaan ne ovat ainoastaan käyttäjän omaan käyttöön.
+Käyttäjä voi luoda uuden visailun, jossa on käyttäjän valitsema määrä arvaustehtäviä. Käyttäjä valitsee jokaiseen tehtävään 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi tehtävän yhteyteen voi liittää muita lisätietoja, kuten kappaleen nimen, esittäjän tai julkaisuvuoden. Näitä tietoja ei näytetä visailun aikana, vaan ne ovat ainoastaan käyttäjän omaan käyttöön.
 
 Teknisiä vaatimuksia visailun luomiselle:
 
@@ -29,15 +29,16 @@ Teknisiä vaatimuksia visailun luomiselle:
 - Käyttäjä voi liittää visailuun haluamansa määrän arvaustehtäviä
 - Käyttäjä voi päättää arvaustehtävään piilotettavat sanat
 - Sovellus tarkistaa lopuksi, että mikään vaadituista kentistä ei ole tyhjänä
-- Visailu tallennetaan tietokantaan
+- Visailu tallennetaan tietokantaan (**tehty osittain**)
 
 ### Tallennettujen visailujen selaileminen
 Käyttäjä voi katsoa järjestelmään tallennettujen visailujen tietoja.
 
 ### Pelaaminen
-- Käyttäjä voi käynnistää sovellukseen tallennetun visailun.
-- Sovellus näyttää tallennettuja tehtäviä yksi kerrallaan.
-- Käyttäjä voi klikata pelinäkymän luukkuja auki haluamassaan järjestyksessä.
+- Käyttäjä voi käynnistää tallennetun visailun. (**tehty**)
+- Sovellus näyttää tallennettuja tehtäviä yksi kerrallaan. (**tehty osittain**)
+- Käyttäjä voi klikata pelinäkymän luukkuja auki haluamassaan järjestyksessä. (**tehty**)
+- Käyttäjä voi lisätä pisteitä joukkueille
 
 ## Jatkokehitysideoita 
 Perusversion toteutuksen jälkeen sovellukseen on mahdollista lisätä ajan salliessa esimerkiksi seuraavia ominaisuuksia:
