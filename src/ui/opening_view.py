@@ -51,10 +51,10 @@ class OpeningView:
             master=self._frame
         )
 
-        quiz_names = management_service.get_quiz_names()
+        quiz_names = management_service.find_quiz_names()
 
-        for i in range(len(quiz_names)):
-            self.__quiz_list.insert(i+1, quiz_names[i])
+        for counter, quiz_name in enumerate(quiz_names):
+            self.__quiz_list.insert(counter, quiz_name)
 
         welcome_label.grid(row=0, column=0, columnspan=2)
         self.__quiz_list.grid(row=1, column=0, columnspan=2)
@@ -70,9 +70,5 @@ class OpeningView:
         if not selection:
             self._show_quiz_messagebox()
             return
-        
-        management_service.find_quiz(selection)
     
-        self._handle_game_view(selection)
-    
-
+        self._handle_game_view(management_service.find_quiz(selection))
