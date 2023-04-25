@@ -20,7 +20,7 @@ class QuizRepository:
 
     def find_all_quizzes(self):
         quiz_names = self.find_quiz_names()
-        
+
         quizzes = {}
         for name in quiz_names:
             quizzes[name] = self.find_quiz(name)

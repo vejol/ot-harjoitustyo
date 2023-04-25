@@ -15,6 +15,6 @@ class GameService:
     def add_point_team2(self):
         self.team2_points += 1
 
-    def reveal_field(self, n):
-        self._revealed[n] = True
-        return self._current_puzzle.words[n]
+    def reveal_field(self, index):
+        self._revealed[index] = True
+        return self._current_puzzle.words[index]
