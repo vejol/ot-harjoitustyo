@@ -1,4 +1,4 @@
-from tkinter import ttk, Label, Frame, constants
+from tkinter import ttk, Label, Frame, PhotoImage
 from PIL import Image, ImageTk
 import os
 
@@ -95,7 +95,7 @@ class GameView:
             command=lambda: self._change_points(team, 1)
         )
 
-        team1_points_label = Label(master=points_frame,
+        self._team1_points_label = Label(master=points_frame,
             text=self._game_service.get_points(team),
             font=("Calibri", 26),
             fg="#FFFFFF",
@@ -104,7 +104,7 @@ class GameView:
 
         team_name_label.grid(row=0,column=0,columnspan=3)
         dec_point_team1_button.grid(row=1, column=0, pady=20)
-        team1_points_label.grid(row=1, column=1, padx=20, pady=20)
+        self._team1_points_label.grid(row=1, column=1, padx=20, pady=20)
         self._add_point_team1_button.grid(row=1, column=2, pady=20)
         points_frame.grid(row=1, column=0, columnspan=2, padx=100, pady=100)
 
