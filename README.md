@@ -8,7 +8,7 @@ Jos joukkue ei keksi mitään laulua, jossa luukusta paljastunut sana esiintyisi
 
 
 ## Releaset
-- Linkki [viikon 4 releaseen](https://github.com/vejol/ot-harjoitustyo/releases/tag/viikko6)
+- Linkki [viikon 6 releaseen](https://github.com/vejol/ot-harjoitustyo/releases/tag/viikko6)
 - Linkki [viikon 5 releaseen](https://github.com/vejol/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Python-versio
