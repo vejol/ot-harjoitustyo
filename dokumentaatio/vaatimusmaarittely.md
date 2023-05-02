@@ -16,18 +16,25 @@ Aluksi sovelluksessa on ainoastaan yksi käyttäjä, _normaali käyttäjä_. My�
 
 Käyttöliittymässä on kolme näkymää:
 
-- Aloitusnäkymä (**tehty osittain**)
+- Aloitusnäkymä (**tehty**)
 - Pelinäkymä (**tehty osittain**)
 - Luo uusi peli -näkymä (**tehty osittain**)
 
+### Sovelluksen käynnistäminen
+Käynnistäessä avautuu aloitusnäkymä:
+
+- Listaus tallennetuista visailuista (**tehty**)
+- Mahdollisuus valita haluamansa visailu ja aloittaa peli (**tehty**)
+- Painikkeet pelitilaan ja muokkaustilaan (**tehty**)
+
 ### Uuden visailun luominen
-Käyttäjä voi luoda uuden visailun, jossa on käyttäjän valitsema määrä arvaustehtäviä. Käyttäjä valitsee jokaiseen tehtävään 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi tehtävän yhteyteen voi liittää muita lisätietoja, kuten kappaleen nimen, esittäjän tai julkaisuvuoden. Näitä tietoja ei näytetä visailun aikana, vaan ne ovat ainoastaan käyttäjän omaan käyttöön.
+Käyttäjä voi luoda uuden visailun, jossa on x määrä arvaustehtäviä. Käyttäjä valitsee jokaiseen tehtävään 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi tehtävän yhteyteen voi liittää muita lisätietoja, kuten kappaleen nimen, esittäjän tai julkaisuvuoden. Näitä tietoja ei näytetä visailun aikana, vaan ne ovat ainoastaan käyttäjän omaan käyttöön.
 
 Teknisiä vaatimuksia visailun luomiselle:
 
-- Käyttäjä antaa visailulle nimen
+- Käyttäjä antaa visailulle nimen (**tehty**)
 - Käyttäjä voi liittää visailuun haluamansa määrän arvaustehtäviä
-- Käyttäjä voi päättää arvaustehtävään piilotettavat sanat
+- Käyttäjä voi päättää arvaustehtävään piilotettavat sanat (**tehty**)
 - Sovellus tarkistaa lopuksi, että mikään vaadituista kentistä ei ole tyhjänä
 - Visailu tallennetaan tietokantaan (**tehty osittain**)
 
@@ -38,7 +45,8 @@ Käyttäjä voi katsoa järjestelmään tallennettujen visailujen tietoja.
 - Käyttäjä voi käynnistää tallennetun visailun. (**tehty**)
 - Sovellus näyttää tallennettuja tehtäviä yksi kerrallaan. (**tehty osittain**)
 - Käyttäjä voi klikata pelinäkymän luukkuja auki haluamassaan järjestyksessä. (**tehty**)
-- Käyttäjä voi lisätä pisteitä joukkueille
+- Käyttäjä voi lisätä pisteitä joukkueille (**tehty osittain**)
+- Käyttäjä voi siirtyä seuraavaan arvoitukseen
 
 ## Jatkokehitysideoita 
 Perusversion toteutuksen jälkeen sovellukseen on mahdollista lisätä ajan salliessa esimerkiksi seuraavia ominaisuuksia:

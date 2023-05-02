@@ -17,3 +17,8 @@ class TestGameService(unittest.TestCase):
     def test_decrementing_point_from_team2_works(self):
         self.game_service.change_points("team2", -2)
         self.assertEqual(self.game_service._points["team2"], -2)
+
+    def test_reveal_field_works(self):
+        self.assertEqual(self.game_service._revealed[3], False)
+        self.game_service.reveal_field(3)
+        self.assertEqual(self.game_service._revealed[3], True)

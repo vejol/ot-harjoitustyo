@@ -24,4 +24,5 @@
 | 1.5.  | 3 | Muotoiltu visailunluomistoimintoa ja tehty käyttöliittymää |
 |       | 1 | Lisätty dokumentaatiota luokkiin ja metodeihin |
 | 2.5.  | 2 | Lisätty pelinäkymään pistelaskuri |
-| Yht.  | 57 | |
+|       | 1 | Lisätty dokumentaatiota |
+| Yht.  | 58 | |

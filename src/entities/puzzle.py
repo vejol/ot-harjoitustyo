@@ -1,5 +1,13 @@
 class Puzzle:
-    """Luokka, joka kuvaa yksittäistä arvoitusta."""
+    """Luokka, joka kuvaa yksittäistä arvoitusta.
+    
+    Attributes:
+        name: Arvoituksen nimi merkkijonona.
+        words: Arvoituksessa piilossa olevat sanat listana.
+        order_no: Kokonaisluku, joka kuvaa arvoituksen järjestysnumeroa.
+                  Arvoitukset on aina liitetty johonkin visailuun, ja
+                  yhdessä visailussa voi olla useampia arvoituksia.
+    """
 
     def __init__(self, name, words, order_no):
         """Luokan konstruktori. Luo uuden arvoitusta kuvaavan olion.

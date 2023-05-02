@@ -18,6 +18,7 @@ Sovellus on suunniteltu Python-versiolla `3.8`. Vanhempien python-versioiden kan
 - [Työaikakirjanpito](./dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
 - [Arkkitehtuurikuvaus](./dokumentaatio/arkkitehtuuri.md)
+- [Käyttöohje](./dokumentaatio/kayttoohje.md)
 
 ## Asennus
 

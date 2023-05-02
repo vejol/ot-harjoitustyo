@@ -26,7 +26,7 @@ class GameService:
     def change_points(self, team, amount):
         self._points[team] += amount
         return self._points[team]
-    
+
     def get_points(self, team):
         return self._points[team]
 

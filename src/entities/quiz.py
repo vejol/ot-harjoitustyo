@@ -1,5 +1,10 @@
 class Quiz:
-    """Luokka, joka kuvaa visailua."""
+    """Luokka, joka kuvaa visailua.
+    
+    Attributes:
+        name: Visailun nimeä kuvaava merkkijono.
+        puzzles: Lista, joka sisältää visailuun liittyvät arvoitukset Puzzle-olioina.
+    """
 
     def __init__(self, name: str, puzzles: list):
         """Luokan konstruktori, joka luo uuden visailua kuvaavan olion.
