@@ -3,11 +3,14 @@ from entities.quiz import Quiz
 from entities.puzzle import Puzzle
 
 class QuizRepository:
+    """Luokka, joka vastaa visailuihin liittyvistä tietokantaoperaatioista."""
 
     def __init__(self):
+        """Luokan konstruktori. Luo uuden tietokantaoperaatioista vastaavan olion."""
         self._connection = get_database_connection()
 
     def delete_all(self):
+        """Tyhjentää kaikki tietokantataulut."""
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -19,6 +22,13 @@ class QuizRepository:
         )
 
     def find_all_quizzes(self):
+        """Palauttaa kaikki tietokantaan tallennetut visailut.
+
+        Returns:
+            Sanakirja, jonka avaimena on visailun nimi ja arvona 
+            nimeä vastaava Quiz-olio.
+        """
+
         quiz_names = self.find_quiz_names()
 
         quizzes = {}
@@ -29,6 +39,13 @@ class QuizRepository:
 
 
     def find_quiz_names(self):
+        """Hakee tietokannasta kaikkien visailujen nimet.
+
+        Returns:
+            Lista, joka sisältää kaikkien tietokannassa olevien
+            visailujen nimet.
+        """
+
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -40,6 +57,14 @@ class QuizRepository:
 
 
     def find_quiz(self, name):
+        """Hakee tietokannasta visailun nimen perusteella.
+
+        Args:
+            name: Merkkijono, joka kuvaa visailun nimeä.
+
+        Returns:
+            Quiz-olio, joka vastaa parametriksi annettua nimeä.
+        """
 
         cursor = self._connection.cursor()
 
@@ -64,7 +89,13 @@ class QuizRepository:
         return Quiz(name, puzzles)
 
 
-    def save(self, quiz: Quiz):
+    def save(self, quiz):
+        """Tallentaa annetun visailun tietokantaan.
+
+        Args:
+            quiz: Olio, joka kuvaa tallennettavaa visailua.
+        """
+
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -74,14 +105,15 @@ class QuizRepository:
 
         for count, puzzle in enumerate(quiz.puzzles):
             cursor.execute(
-                '''INSERT INTO Puzzles (name, 
-                                        order_no, 
-                                        quiz_id, 
-                                        word1, 
-                                        word2, 
-                                        word3, 
-                                        word4, 
-                                        word5)
+                '''INSERT INTO Puzzles (
+                        name, 
+                        order_no, 
+                        quiz_id, 
+                        word1, 
+                        word2, 
+                        word3, 
+                        word4, 
+                        word5)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
                 [puzzle.name,
                  count + 1,

@@ -1,9 +1,19 @@
 from tkinter import ttk, constants, Listbox, messagebox
 from services.management_service import management_service
 
+
 class OpeningView:
+    """Luokka, joka vastaa ohjelman käyttöliittymän aloitusnäkymästä."""
 
     def __init__(self, root, hande_game_view, handle_new_quiz_view):
+        """Luokan konstruktori. Luo uuden aloitusnäkymän.
+
+        Args:
+            root: TKinter-elementti, joka sisältää ohjelman ikkunan.
+            hande_game_view: Arvo, jota kutsumalla avautuu uusi pelinäkymä.
+            handle_new_quiz_view: Arvo, jota kutsumalla avautuu uusi visailujenluomisnäkymä.
+        """
+
         self._root = root
         self._handle_game_view = hande_game_view
         self._handle_new_quiz_view = handle_new_quiz_view
@@ -12,6 +22,7 @@ class OpeningView:
         self._initialize()
     
     def destroy(self):
+        """Sulkee näkymän."""
         self._frame.destroy()
 
     def __selected_quiz(self):
@@ -24,6 +35,7 @@ class OpeningView:
 
 
     def pack(self):
+        """Näyttää näkymän."""
         self._frame.pack(fill=constants.X)
             
     def _initialize(self):

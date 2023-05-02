@@ -22,3 +22,9 @@
 - SQLite tietokanta otettu käyttöön
 - Lisätty ManagementService-luokka, joka hoitaa pelinäkymän ulkopuolisia palveluita
 - Päädytty luomaan erilliset luokat Quiz ja Puzzle, eli Puzzle on "arvoitus" ja Quiz on "visailu", visailuun voi liittyä monta arvoitusta
+
+## Viikko 6
+- Siirretty pelinäkymä kokonäytön tilaan
+- Lisätty pelinäkymään punaisten sanojen toiminnallisuus: game_service arpoo jokaiseen visailuun kaksi punaista sanaa
+- Luotu visailujenluomisnäkymään käyttöliittymä oman visailun tekemiseen (Logiikka puuttuu)
+- Lisätty pelinäkymään joukkueen 1 pistelaskuri

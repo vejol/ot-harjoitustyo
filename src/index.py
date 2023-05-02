@@ -1,10 +1,10 @@
 from tkinter import Tk
 from ui.ui import UI
 
-
 def main():
+
     window = Tk()
-    window.title("Bumtsibum")
+    window.title("Musiikkivisa")
     window.geometry("900x450")
 
     ui_view = UI(window)
