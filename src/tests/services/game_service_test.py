@@ -11,5 +11,9 @@ class TestGameService(unittest.TestCase):
         self.game_service = GameService(quiz)
 
     def test_adding_point_to_team1_works(self):
-        self.game_service.add_point_team1()
-        self.assertEqual(self.game_service.team1_points, 1)
+        self.game_service.change_points("team1", 2)
+        self.assertEqual(self.game_service._points["team1"], 2)
+
+    def test_decrementing_point_from_team2_works(self):
+        self.game_service.change_points("team2", -2)
+        self.assertEqual(self.game_service._points["team2"], -2)
