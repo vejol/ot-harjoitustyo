@@ -40,6 +40,11 @@ poetry run invoke build
 poetry run invoke start
 ```
 
+Jos sovellusta käynnistäessä kohtaat virheen ModuleNotFoundError: No module named 'PIL', kokeile antaa seuraava komento ja anna sitten kohdan 3. komento uudestaan:
+```bash
+poetry shell
+```
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
