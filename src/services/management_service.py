@@ -30,7 +30,7 @@ class ManagementService:
         self.add_quiz(Quiz("Joululauluvisa", [puzzle2]))
 
 
-    def find_quiz_names(self):
+    def get_quiz_names(self):
         """Palauttaa tallennettujen visailujen nimet.
 
         Returns:
@@ -49,7 +49,7 @@ class ManagementService:
         return self._quiz_repository.find_all_quizzes()
 
 
-    def find_quiz(self, name):
+    def get_quiz(self, name):
         """Palauttaa halutun visailun nimen perusteella.
 
         Args:

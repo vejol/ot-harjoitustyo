@@ -1,5 +1,94 @@
 from tkinter import ttk, constants, Frame
 
+class CreateQuizView:
+    """Luokka, joka vastaa visailujen luomiseen tarkoitetusta näkymästä."""
+
+    def __init__(self, root, handle_opening_view, quiz):
+        """Luokan konstruktori. Luo uuden visailujenluomisnäkymän.
+
+        Args:
+            root: TKinter-elementti, joka sisältää ohjelman ikkunan.
+            handle_opening_view: Arvo, jota kutsumalla pääsee takaisin aloitusnäkymään.
+        """
+
+        self._root = root
+        self._handle_opening_view = handle_opening_view
+        self._quiz = quiz
+        self._frame = None
+        self._puzzle_query_frame = None
+        self._puzzle_query_view = None
+
+        self._initialize()
+
+    def destroy(self):
+        """Sulkee näkymän."""
+        self._frame.destroy()
+
+    def pack(self):
+        """Näyttää näkymän."""
+        self._frame.pack(fill=constants.X)
+                
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+        self._puzzle_query_frame = ttk.Frame(master=self._frame)
+
+        self._initialize_upper_part()
+        self._initialize_puzzle_query_list()
+        self._initialize_footer()
+
+        self._puzzle_query_frame.grid(
+            row=1,
+            column=0,
+            columnspan=2,
+            sticky=constants.EW
+        )
+
+    def _initialize_footer(self):
+
+        cancel_button = ttk.Button(
+            master=self._frame,
+            text="Peruuta",
+            command=self._handle_opening_view
+        )
+
+        save_button = ttk.Button(
+            master=self._frame,
+            text="Tallenna",
+            command=self._handle_save_and_return
+        )
+
+        cancel_button.grid(row=3, column=0)
+        save_button.grid(row=3, column=1)
+
+    def _initialize_puzzle_query_list(self):
+        if self._puzzle_query_view:
+            self._puzzle_query_view.destroy()
+
+        self._puzzle_query_view = PuzzleQueryList(self._puzzle_query_frame, 2)
+
+        self._puzzle_query_view.pack()
+
+
+    def _initialize_upper_part(self):
+
+        quiz_name_label = ttk.Label(
+            master=self._frame,
+            text="Visailun nimi:",
+            font="Helvetica 10 bold"
+        )
+
+        quiz_name_entry = ttk.Entry(master=self._frame)
+
+        quiz_name_label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.E)
+        quiz_name_entry.grid(row=0, column=1, padx=5, pady=5, sticky=constants.EW)
+
+
+    def _handle_save_and_return(self):
+        # Saving the new quiz to database
+        self._puzzle_query_view.pack()
+        #self._handle_opening_view()
+
+
 class PuzzleQueryList:
     """Arvoitusten listaamisesta vastaava näkymä."""
      
@@ -72,91 +161,3 @@ class PuzzleQueryList:
 
         for i in range(self._query_count):
             self._initialize_puzzle_query(i+1)
-
-
-class CreateQuizView:
-    """Luokka, joka vastaa visailujen luomiseen tarkoitetusta näkymästä."""
-
-    def __init__(self, root, handle_opening_view):
-        """Luokan konstruktori. Luo uuden visailujenluomisnäkymän.
-
-        Args:
-            root: TKinter-elementti, joka sisältää ohjelman ikkunan.
-            handle_opening_view: Arvo, jota kutsumalla pääsee takaisin aloitusnäkymään.
-        """
-
-        self._root = root
-        self._handle_opening_view = handle_opening_view
-        self._frame = None
-        self._puzzle_query_frame = None
-        self._puzzle_query_view = None
-
-        self._initialize()
-
-    def destroy(self):
-        """Sulkee näkymän."""
-        self._frame.destroy()
-
-    def pack(self):
-        """Näyttää näkymän."""
-        self._frame.pack(fill=constants.X)
-                
-    def _initialize(self):
-        self._frame = ttk.Frame(master=self._root)
-        self._puzzle_query_frame = ttk.Frame(master=self._frame)
-
-        self._initialize_upper_part()
-        self._initialize_puzzle_query_list()
-        self._initialize_footer()
-
-        self._puzzle_query_frame.grid(
-            row=1,
-            column=0,
-            columnspan=2,
-            sticky=constants.EW
-        )
-
-    def _initialize_footer(self):
-
-        cancel_button = ttk.Button(
-            master=self._frame,
-            text="Peruuta",
-            command=self._handle_opening_view
-        )
-
-        save_button = ttk.Button(
-            master=self._frame,
-            text="Tallenna",
-            command=self._handle_save_and_return
-        )
-
-        cancel_button.grid(row=3, column=0)
-        save_button.grid(row=3, column=1)
-
-    def _initialize_puzzle_query_list(self):
-        if self._puzzle_query_view:
-            self._puzzle_query_view.destroy()
-
-        self._puzzle_query_view = PuzzleQueryList(self._puzzle_query_frame, 2)
-
-        self._puzzle_query_view.pack()
-
-
-    def _initialize_upper_part(self):
-
-        quiz_name_label = ttk.Label(
-            master=self._frame,
-            text="Visailun nimi:",
-            font="Helvetica 10 bold"
-        )
-
-        quiz_name_entry = ttk.Entry(master=self._frame)
-
-        quiz_name_label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.E)
-        quiz_name_entry.grid(row=0, column=1, padx=5, pady=5, sticky=constants.EW)
-
-
-    def _handle_save_and_return(self):
-         # Saving the new quiz to database
-         self._puzzle_query_view.pack()
-         #self._handle_opening_view()

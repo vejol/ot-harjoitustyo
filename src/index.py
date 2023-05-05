@@ -5,7 +5,6 @@ def main():
 
     window = Tk()
     window.title("Musiikkivisa")
-    window.geometry("900x450")
 
     ui_view = UI(window)
     ui_view.start()

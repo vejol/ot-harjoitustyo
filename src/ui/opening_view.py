@@ -1,4 +1,4 @@
-from tkinter import ttk, constants, Listbox, messagebox
+from tkinter import ttk, constants, Listbox, messagebox, constants
 from services.management_service import management_service
 
 
@@ -25,7 +25,7 @@ class OpeningView:
         """Sulkee näkymän."""
         self._frame.destroy()
 
-    def __selected_quiz(self):
+    def __selected_quiz_name(self):
         value = self.__quiz_list.curselection()
 
         if not value:
@@ -36,7 +36,7 @@ class OpeningView:
 
     def pack(self):
         """Näyttää näkymän."""
-        self._frame.pack(fill=constants.X)
+        self._frame.pack(fill=constants.X, padx=10, pady=10)
             
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -44,7 +44,13 @@ class OpeningView:
         start_game_button = ttk.Button(
             master=self._frame,
             text="Aloita peli",
-            command=self.__start_game_action
+            command=lambda: self.__take_action(self._handle_game_view)
+        )
+
+        modify_button = ttk.Button(
+            master=self._frame,
+            text="Muokkaa",
+            command=lambda: self.__take_action(self._handle_new_quiz_view)
         )
 
         create_quiz_button = ttk.Button(
@@ -53,34 +59,39 @@ class OpeningView:
             command=self._handle_new_quiz_view
         )
 
-        welcome_label = ttk.Label(
+        quiz_label = ttk.Label(
             master=self._frame, 
-            text="Tervetuloa pelaamaan Musiikkivisaa!",
-            font=("Helvetica", 25)
+            text="Tallennetut visailut:",
+            font=("Helvetica", 12, "bold")
         )
         
         self.__quiz_list = Listbox(
             master=self._frame
         )
 
-        quiz_names = management_service.find_quiz_names()
+        quiz_names = management_service.get_quiz_names()
 
         for counter, quiz_name in enumerate(quiz_names):
             self.__quiz_list.insert(counter, quiz_name)
 
-        welcome_label.grid(row=0, column=0, columnspan=2)
-        self.__quiz_list.grid(row=1, column=0, columnspan=2)
-        start_game_button.grid(row=2, column=0)
-        create_quiz_button.grid(row=2, column=1)
+        quiz_label.grid(row=0, column=0, columnspan=2, sticky=constants.W)
+        self.__quiz_list.grid(row=1, column=0, columnspan=3, sticky=constants.EW)
+        start_game_button.grid(row=2, column=0, padx=10, pady=10)
+        modify_button.grid(row=2, column=1, padx=10, pady=10)
+        create_quiz_button.grid(row=2, column=2, padx=10, pady=10)
     
     def _show_quiz_messagebox(self):
-        messagebox.showinfo(title="Valitse visailu", message="Valitse ensin haluamasi visailu listalta!")
+        messagebox.showinfo(
+            title="Valitse visailu", 
+            message="Valitse ensin haluamasi visailu listalta!"
+        )
 
-    def __start_game_action(self):
-        selection = self.__selected_quiz()
+    def __take_action(self, action_handle):
+        quiz_name = self.__selected_quiz_name()
 
-        if not selection:
+        if not quiz_name:
             self._show_quiz_messagebox()
             return
-    
-        self._handle_game_view(management_service.find_quiz(selection))
+
+        selected_quiz = management_service.get_quiz(quiz_name)
+        action_handle(selected_quiz)

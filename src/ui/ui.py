@@ -28,15 +28,17 @@ class UI:
         """Luo käyttöliittymän aloitusnäkymän."""
         self._show_opening_view()
 
-    def _show_create_quiz_view(self):
+    def _show_create_quiz_view(self, quiz=None):
         self._hide_current_view()
 
         self._current_view = CreateQuizView(
             self._root,
-            self._show_opening_view
+            self._show_opening_view,
+            quiz
         )
 
         self._current_view.pack()
+        self._root.geometry("")
 
     def _show_game_view(self, quiz):
         self._hide_current_view()
