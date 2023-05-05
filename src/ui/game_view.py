@@ -21,8 +21,6 @@ class GameView:
         self._frame = None
         self._blue_field_img = None
         self._red_field_img = None
-        self._team1_points_label = None
-        self._team2_points_label = None
         self._quiz_fields = []
 
         self._initialize()
@@ -44,8 +42,11 @@ class GameView:
         self._initialize_quiz_fields()
         self._pack_quiz_fields()
 
-        self._init_point_counter("team1")
-        #self._init_point_counter("team2")
+        team1_points_frame = self._init_point_counter("team1", "Joukkue 1:n\npisteet")
+        team2_points_frame = self._init_point_counter("team2", "Joukkue 2:n\npisteet")
+
+        team1_points_frame.grid(row=1, column=0, columnspan=2, padx=100, pady=100)
+        team2_points_frame.grid(row=1, column=2, columnspan=3, padx=100, pady=100)
 
         quit_button = ttk.Button(
             master=self._frame,
@@ -54,7 +55,7 @@ class GameView:
         )
 
         self._root.grid_columnconfigure(0, weight=1)
-        quit_button.grid(row=2, column=0, pady=20)
+        quit_button.grid(row=4, column=0, pady=20)
 
     def _initialize_images(self):
         current_path = os.path.dirname(__file__)
@@ -73,44 +74,49 @@ class GameView:
             pad_size = self._root.winfo_screenwidth() // 60
             self._quiz_fields[i].grid(row=0, column=i, padx=pad_size, pady=pad_size)
     
-    def _init_point_counter(self, team):
+    def _init_point_counter(self, team, label_text):
         points_frame = Frame(master=self._frame, bg="#1E3E5D")
 
         team_name_label = Label(master=points_frame,
-            text="Joukkue 1:n\npisteet",
+            text=label_text,
             font=("Calibri", 26),
             fg="#FFFFFF",
             bg="#1E3E5D"
             )
 
-        dec_point_team1_button = ttk.Button(
+        points_label = Label(master=points_frame,
+            text=self._game_service.get_points(team),
+            font=("Helvetica", 60),
+            fg="#FFFFFF",
+            bg="#1E3E5D"
+            )
+
+        dec_point_button = ttk.Button(
             master=points_frame,
             text="-",
-            command=lambda: self._change_points(team, -1)
+            command=lambda: self._dec_point(team, points_label)
         )
 
-        self._add_point_team1_button = ttk.Button(
+        add_point_button = ttk.Button(
             master=points_frame,
             text="+",
-            command=lambda: self._change_points(team, 1)
+            command=lambda: self._add_point(team, points_label)
         )
 
-        self._team1_points_label = Label(master=points_frame,
-            text=self._game_service.get_points(team),
-            font=("Calibri", 26),
-            fg="#FFFFFF",
-            bg="#1E3E5D"
-            )
-
         team_name_label.grid(row=0,column=0,columnspan=3)
-        dec_point_team1_button.grid(row=1, column=0, pady=20)
-        self._team1_points_label.grid(row=1, column=1, padx=20, pady=20)
-        self._add_point_team1_button.grid(row=1, column=2, pady=20)
-        points_frame.grid(row=1, column=0, columnspan=2, padx=100, pady=100)
+        dec_point_button.grid(row=1, column=0, pady=20)
+        points_label.grid(row=1, column=1, padx=20, pady=20)
+        add_point_button.grid(row=1, column=2, pady=20)
 
-    def _change_points(self, team, amount):
-        points = self._game_service.change_points(team, amount)
-        self._team1_points_label.config(text=points)
+        return points_frame
+
+    def _add_point(self, team, points_label):
+        points = self._game_service.add_point(team)
+        points_label.config(text=points)
+
+    def _dec_point(self, team, points_label):
+        points = self._game_service.dec_point(team)
+        points_label.config(text=points)
 
     def _initialize_quiz_fields(self):
 

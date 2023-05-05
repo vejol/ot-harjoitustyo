@@ -23,8 +23,12 @@ class GameService:
         self._current_puzzle = self._quiz.puzzles[index]
         self._red_words = sample([0, 1, 2, 3, 4], 2)
 
-    def change_points(self, team, amount):
-        self._points[team] += amount
+    def add_point(self, team):
+        self._points[team] += 1
+        return self._points[team]
+
+    def dec_point(self, team):
+        self._points[team] -= 1
         return self._points[team]
 
     def get_points(self, team):
