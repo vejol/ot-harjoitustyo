@@ -10,13 +10,21 @@ class TestGameService(unittest.TestCase):
         quiz = Quiz("Test Quiz", [puzzle])
         self.game_service = GameService(quiz)
 
-    def test_adding_point_to_team1_works(self):
-        self.game_service.change_points("team1", 2)
+    def test_adding_point_works(self):
+        self.game_service.add_point("team1")
+        self.game_service.add_point("team1")
         self.assertEqual(self.game_service._points["team1"], 2)
 
-    def test_decrementing_point_from_team2_works(self):
-        self.game_service.change_points("team2", -2)
-        self.assertEqual(self.game_service._points["team2"], -2)
+        self.game_service.add_point("team2")
+        self.assertEqual(self.game_service._points["team2"], 1)
+
+    def test_decrementing_point_works(self):
+        self.game_service.dec_point("team1")
+        self.game_service.dec_point("team1")
+        self.assertEqual(self.game_service._points["team1"], -2)
+
+        self.game_service.dec_point("team2")
+        self.assertEqual(self.game_service._points["team2"], -1)
 
     def test_reveal_field_works(self):
         self.assertEqual(self.game_service._revealed[3], False)

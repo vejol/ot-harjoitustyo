@@ -14,6 +14,7 @@ class CreateQuizView:
         self._root = root
         self._handle_opening_view = handle_opening_view
         self._quiz = quiz
+        
         self._frame = None
         self._puzzle_query_frame = None
         self._puzzle_query_view = None

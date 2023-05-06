@@ -13,15 +13,19 @@ class GameService:
         self._quiz = quiz
         self._current_puzzle = None
         self._points = {"team1": 0, "team2": 0}
-        self._puzzle_counter = 0
         self._revealed = [False] * 5
         self._red_words = []
-        self.__initialize_puzzle(0)
+        self._initialize_puzzle()
 
-    def __initialize_puzzle(self, index):
-        self._puzzle_counter += 1
-        self._current_puzzle = self._quiz.puzzles[index]
+    def _initialize_puzzle(self):
+        self._current_puzzle = self._quiz.puzzles.pop(0)
         self._red_words = sample([0, 1, 2, 3, 4], 2)
+
+    def next_puzzle(self):
+        self._initialize_puzzle()
+
+    def puzzles_left(self):
+        return len(self._quiz.puzzles) > 0
 
     def add_point(self, team):
         self._points[team] += 1
@@ -30,6 +34,9 @@ class GameService:
     def dec_point(self, team):
         self._points[team] -= 1
         return self._points[team]
+    
+    def get_answer(self):
+        return self._current_puzzle.name
 
     def get_points(self, team):
         return self._points[team]

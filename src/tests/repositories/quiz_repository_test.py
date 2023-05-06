@@ -47,6 +47,6 @@ class TestQuizRepository(unittest.TestCase):
 
         names = self.quiz_repository.find_quiz_names()
 
+        self.assertTrue("Test Quiz 1" in names)
+        self.assertTrue("Test Quiz 2" in names)
         self.assertTrue(len(names) == 2)
-        self.assertEqual(quiz1.puzzles[0].name, "Test Puzzle 1")
-        self.assertEqual(quiz2.puzzles[0].name, "Test Puzzle 2")

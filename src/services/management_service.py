@@ -24,10 +24,11 @@ class ManagementService:
         """Lisää sovellukseen mallivisailut."""
 
         puzzle1 = Puzzle("Maamme-laulu", ["laaksoa", "ei", "kukkulaa", "ei", "vettä"], 1)
-        puzzle2 = Puzzle("Petteri Punakuono", ["pitkä", "on", "taival", "valoton,", "Petteri"], 1)
+        puzzle2 = Puzzle("Kalliolle kukkulalle", ["kalliolle", "kukkulalle", "rakennan", "minä", "majani"], 2)
+        puzzle3 = Puzzle("Petteri Punakuono", ["pitkä", "on", "taival", "valoton,", "Petteri"], 1)
 
-        self.add_quiz(Quiz("Suomivisa", [puzzle1]))
-        self.add_quiz(Quiz("Joululauluvisa", [puzzle2]))
+        self.add_quiz(Quiz("Suomivisa", [puzzle1, puzzle2]))
+        self.add_quiz(Quiz("Joululauluvisa", [puzzle3]))
 
 
     def get_quiz_names(self):

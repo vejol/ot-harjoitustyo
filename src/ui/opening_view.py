@@ -17,6 +17,7 @@ class OpeningView:
         self._root = root
         self._handle_game_view = hande_game_view
         self._handle_new_quiz_view = handle_new_quiz_view
+        self._quiz_list = None
         self._frame = None
 
         self._initialize()
@@ -25,13 +26,13 @@ class OpeningView:
         """Sulkee näkymän."""
         self._frame.destroy()
 
-    def __selected_quiz_name(self):
-        value = self.__quiz_list.curselection()
+    def _selected_quiz_name(self):
+        value = self._quiz_list.curselection()
 
         if not value:
             return None
         
-        return self.__quiz_list.get(value)
+        return self._quiz_list.get(value)
 
 
     def pack(self):
@@ -65,17 +66,17 @@ class OpeningView:
             font=("Helvetica", 12, "bold")
         )
         
-        self.__quiz_list = Listbox(
+        self._quiz_list = Listbox(
             master=self._frame
         )
 
         quiz_names = management_service.get_quiz_names()
 
         for counter, quiz_name in enumerate(quiz_names):
-            self.__quiz_list.insert(counter, quiz_name)
+            self._quiz_list.insert(counter, quiz_name)
 
         quiz_label.grid(row=0, column=0, columnspan=2, sticky=constants.W)
-        self.__quiz_list.grid(row=1, column=0, columnspan=3, sticky=constants.EW)
+        self._quiz_list.grid(row=1, column=0, columnspan=3, sticky=constants.EW)
         start_game_button.grid(row=2, column=0, padx=10, pady=10)
         modify_button.grid(row=2, column=1, padx=10, pady=10)
         create_quiz_button.grid(row=2, column=2, padx=10, pady=10)
@@ -87,7 +88,7 @@ class OpeningView:
         )
 
     def __take_action(self, action_handle):
-        quiz_name = self.__selected_quiz_name()
+        quiz_name = self._selected_quiz_name()
 
         if not quiz_name:
             self._show_quiz_messagebox()

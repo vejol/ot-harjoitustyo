@@ -1,11 +1,12 @@
-from tkinter import ttk, Label, Frame, PhotoImage
+from services.game_service import GameService
+from tkinter import ttk, Label, Frame, constants
 from PIL import Image, ImageTk
 import os
 
 class GameView:
     """Luokka, joka vastaa pelinäkymästä."""
 
-    def __init__(self, root, handle_opening_view, game_service):
+    def __init__(self, root, handle_opening_view, game_service: GameService):
         """Luokan konstruktori. Luo uuden pelinäkymän.
 
         Args:
@@ -36,7 +37,7 @@ class GameView:
         self._root.attributes('-fullscreen', True)
 
     def _initialize(self):
-        self._frame = Frame(master=self._frame, bg="#1E3E5D")
+        self._frame = Frame(master=self._root, bg="#1E3E5D")
         self._initialize_images()
 
         self._initialize_quiz_fields()
@@ -48,14 +49,32 @@ class GameView:
         team1_points_frame.grid(row=1, column=0, columnspan=2, padx=100, pady=100)
         team2_points_frame.grid(row=1, column=2, columnspan=3, padx=100, pady=100)
 
+        reveal_answer_button = ttk.Button(
+            master=self._frame,
+            text="Näytä oikea vastaus",
+            command=self._handle_reveal_answer
+        )
+
+        next_quiz_button = ttk.Button(
+            master=self._frame,
+            text="Siirry seuraavaan arvoitukseen",
+            command=self._handle_next_puzzle
+        )
+
         quit_button = ttk.Button(
             master=self._frame,
             text="Lopeta",
             command=self._handle_quit_game
         )
 
+
         self._root.grid_columnconfigure(0, weight=1)
-        quit_button.grid(row=4, column=0, pady=20)
+        reveal_answer_button.grid(row=5, column=0)
+
+        if self._game_service.puzzles_left():
+            next_quiz_button.grid(row=5, column=1)
+
+        quit_button.grid(row=5, column=4, pady=20)
 
     def _initialize_images(self):
         current_path = os.path.dirname(__file__)
@@ -94,19 +113,21 @@ class GameView:
         dec_point_button = ttk.Button(
             master=points_frame,
             text="-",
-            command=lambda: self._dec_point(team, points_label)
+            command=lambda: self._dec_point(team, points_label),
+            width=3
         )
 
         add_point_button = ttk.Button(
             master=points_frame,
             text="+",
-            command=lambda: self._add_point(team, points_label)
+            command=lambda: self._add_point(team, points_label),
+            width=3
         )
 
         team_name_label.grid(row=0,column=0,columnspan=3)
-        dec_point_button.grid(row=1, column=0, pady=20)
+        dec_point_button.grid(row=1, column=0, pady=20, sticky=constants.E)
         points_label.grid(row=1, column=1, padx=20, pady=20)
-        add_point_button.grid(row=1, column=2, pady=20)
+        add_point_button.grid(row=1, column=2, pady=20, sticky=constants.W)
 
         return points_frame
 
@@ -136,6 +157,28 @@ class GameView:
     def _handle_quit_game(self):
         self._handle_opening_view()
 
+    def _handle_reveal_answer(self):
+        answer = self._game_service.get_answer()
+        answer_label = Label(master=self._frame,
+            text=answer,
+            font="Helvetica 24 bold",
+            fg="#FFFFFF",
+            bg="#1E3E5D"
+        )
+        
+        answer_label.grid(row=4,column=0, columnspan=5)
+        self.pack()
+
+    def _reset_view(self):
+        self._frame.destroy()
+        self._quiz_fields = []
+        self._initialize()
+        self.pack()
+
+    def _handle_next_puzzle(self):
+        if self._game_service.puzzles_left():
+            self._game_service.next_puzzle()
+            self._reset_view()
 
     def _handle_reveal_word(self, n: int):
         word = self._game_service.reveal_field(n)
