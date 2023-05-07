@@ -1,6 +1,6 @@
 from ui.game_view import GameView
 from ui.opening_view import OpeningView
-from ui.create_quiz_view import CreateQuizView
+from ui.quiz_creation_view import QuizCreationView
 from services.game_service import GameService
 from services.management_service import ManagementService
 
@@ -31,7 +31,7 @@ class UI:
     def _show_create_quiz_view(self, quiz=None):
         self._hide_current_view()
 
-        self._current_view = CreateQuizView(
+        self._current_view = QuizCreationView(
             self._root,
             self._show_opening_view,
             quiz

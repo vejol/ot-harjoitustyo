@@ -25,4 +25,9 @@
 |       | 1 | Lisätty dokumentaatiota luokkiin ja metodeihin |
 | 2.5.  | 2 | Lisätty pelinäkymään pistelaskuri |
 |       | 1 | Lisätty dokumentaatiota |
-| Yht.  | 58 | |
+| 6.5.  | 1 | Otettu dotenv käyttöön ja poistettu koodista suorat viittaukset tietokantatiedostoon |
+|       | 1 | Lisätty pelinäkymään oikean vastauksen näyttämistoiminto ja toteutettu sitä vastaava logiikka |
+|       | 3 | Lisätty pelinäkymään ja gameserviceen mahdollisuus siirtyä seuraavaan arvoitukseen |
+| 7.5.  | 5 | Lisätty luokka PuzzleCreationWindow uusien visailujen lisäämiseen |
+
+| Yht.  | 63 | |

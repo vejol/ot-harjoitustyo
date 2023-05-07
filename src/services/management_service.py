@@ -61,6 +61,12 @@ class ManagementService:
         """
 
         return self._quiz_repository.find_quiz(name)
+    
+    def create_puzzle(self, input: list):
+        stripped_input = [s.strip() for s in input]
+        if "" in stripped_input:
+            return "Täytä kaikki kentät."
+        pass
 
 
 management_service = ManagementService()

@@ -28,3 +28,8 @@
 - Lisätty pelinäkymään punaisten sanojen toiminnallisuus: game_service arpoo jokaiseen visailuun kaksi punaista sanaa
 - Luotu visailujenluomisnäkymään käyttöliittymä oman visailun tekemiseen (Logiikka puuttuu)
 - Lisätty pelinäkymään joukkueen 1 pistelaskuri
+
+## Viikko 7 
+- Lisätty pelinäkymään joukkueen 2 pistelaskuri
+- Lisätty pelinäkymään oikean vastauksen paljastamistoiminto
+- Muutettu visailunluomisnäkymää niin, että uuden arvoituksen tiedot annetaan erillisessä ikkunassa
