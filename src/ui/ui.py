@@ -1,6 +1,6 @@
 from ui.game_view import GameView
 from ui.opening_view import OpeningView
-from ui.quiz_creation_view import QuizCreationView
+from ui.edit_view import EditView
 from services.game_service import GameService
 from services.management_service import ManagementService
 from services.edit_service import EditService
@@ -18,8 +18,6 @@ class UI:
 
         self._root = root
         self._current_view = None
-        #ManagementService().add_default_quizzes()
-
 
     def _hide_current_view(self):
         if self._current_view:
@@ -33,7 +31,7 @@ class UI:
     def _show_create_quiz_view(self, quiz=Quiz("", [])):
         self._hide_current_view()
 
-        self._current_view = QuizCreationView(
+        self._current_view = EditView(
             self._root,
             self._show_opening_view,
             EditService(quiz)

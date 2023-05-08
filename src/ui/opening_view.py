@@ -5,18 +5,18 @@ from services.management_service import management_service
 class OpeningView:
     """Luokka, joka vastaa ohjelman käyttöliittymän aloitusnäkymästä."""
 
-    def __init__(self, root, hande_game_view, handle_new_quiz_view):
+    def __init__(self, root, hande_game_view, handle_edit_view):
         """Luokan konstruktori. Luo uuden aloitusnäkymän.
 
         Args:
             root: TKinter-elementti, joka sisältää ohjelman ikkunan.
             hande_game_view: Arvo, jota kutsumalla avautuu uusi pelinäkymä.
-            handle_new_quiz_view: Arvo, jota kutsumalla avautuu uusi visailujenluomisnäkymä.
+            handle_edit_view: Arvo, jota kutsumalla avautuu uusi visailujenluomisnäkymä.
         """
 
         self._root = root
         self._handle_game_view = hande_game_view
-        self._handle_new_quiz_view = handle_new_quiz_view
+        self._handle_edit_view = handle_edit_view
         self._quiz_list = None
         self._frame = None
 
@@ -50,7 +50,7 @@ class OpeningView:
         start_game_button = ttk.Button(
             master=self._frame,
             text="Aloita peli",
-            command=lambda: self.__take_action(self._handle_game_view)
+            command=lambda: self._take_action(self._handle_game_view)
         )
 
         start_game_button.grid(
@@ -65,19 +65,19 @@ class OpeningView:
         create_quiz_button = ttk.Button(
             master=self._frame,
             text="Luo uusi peli",
-            command=self._handle_new_quiz_view
+            command=self._handle_edit_view
         )
 
         modify_button = ttk.Button(
             master=self._frame,
             text="Muokkaa",
-            command=lambda: self.__take_action(self._handle_new_quiz_view)
+            command=lambda: self._take_action(self._handle_edit_view)
         )
 
         delete_button = ttk.Button(
             master=self._frame,
             text="Poista",
-            command=""
+            command=self._handle_delete_quiz
         )
 
         create_quiz_button.grid(
@@ -133,13 +133,21 @@ class OpeningView:
             sticky=constants.EW
         )
     
+    def _handle_delete_quiz(self):
+        self._take_action(management_service.delete_quiz)
+        
+        if self._quiz_list:
+            self._quiz_list.destroy()
+
+        self._init_quiz_list()
+    
     def _show_quiz_messagebox(self):
         messagebox.showinfo(
             title="Valitse visailu", 
             message="Valitse ensin haluamasi visailu listalta!"
         )
 
-    def __take_action(self, action_handle):
+    def _take_action(self, action_handle):
         quiz_name = self._get_selected_quiz_name()
 
         if not quiz_name:

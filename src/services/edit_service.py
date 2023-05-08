@@ -38,12 +38,9 @@ class EditService:
         puzzle = Puzzle(name, words)
 
         self._quiz.puzzles.append(puzzle)
-
-    def create_puzzle(self, user_input: list):
-        stripped_user_input = [s.strip() for s in user_input]
-        if "" in stripped_user_input:
-            pass
-            #return "Täytä kaikki kentät."
+    
+    def remove_puzzle(self, n):
+        self._quiz.puzzles.pop(n)
 
     def save_quiz(self):
         if self._old_quiz.name != "":

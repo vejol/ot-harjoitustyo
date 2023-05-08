@@ -30,6 +30,8 @@ class QuizRepository:
         cursor.execute("DELETE FROM Quizzes WHERE (name=?)", [quiz.name])
         cursor.execute("DELETE FROM Puzzles WHERE (quiz_id=?)", [quiz_id])
 
+        self._connection.commit()
+
     def find_all_quizzes(self):
         """Palauttaa kaikki tietokantaan tallennetut visailut.
 

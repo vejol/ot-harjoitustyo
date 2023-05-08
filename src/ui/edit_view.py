@@ -1,7 +1,7 @@
 from tkinter import ttk, constants, Frame, Toplevel, INSERT, messagebox
 from services.edit_service import EditService, QuizExistError, NoQuizNameError
 
-class QuizCreationView:
+class EditView:
     """Luokka, joka vastaa visailujen luomiseen tarkoitetusta näkymästä."""
 
     def __init__(self, root, handle_opening_view, edit_service: EditService):
@@ -78,7 +78,9 @@ class QuizCreationView:
         self._puzzle_list_view = PuzzleListView(
             self._puzzle_list_frame, 
             self._service,
-            puzzles)
+            puzzles,
+            self._init_puzzle_list
+        )
 
         self._puzzle_list_view.pack()
 
@@ -131,7 +133,7 @@ class QuizCreationView:
 class PuzzleListView:
     """Arvoitusten listaamisesta vastaava näkymä."""
      
-    def __init__(self, root, service, puzzles):
+    def __init__(self, root, service, puzzles, handle_update_list_view):
         """Luokan konstruktori. Luo uuden arvoituksia listaavan näkymän.
 
         Args:
@@ -142,6 +144,7 @@ class PuzzleListView:
         self._root = root
         self._service = service
         self._puzzles = puzzles
+        self._handle_update_list_view = handle_update_list_view
         self._frame = None
 
         self._initialize()
@@ -197,8 +200,8 @@ class PuzzleListView:
         puzzle_frame.pack(fill=constants.X)
 
     def _handle_remove(self, n):
-        self._service.remove(n)
-        #self._update_list_view()
+        self._service.remove_puzzle(n)
+        self._handle_update_list_view()
 
 
 class PuzzleCreationWindow:
