@@ -3,6 +3,8 @@ from ui.opening_view import OpeningView
 from ui.quiz_creation_view import QuizCreationView
 from services.game_service import GameService
 from services.management_service import ManagementService
+from services.edit_service import EditService
+from entities.quiz import Quiz
 
 class UI:
     """Luokka, joka vastaa sovelluksen käyttöliittymästä ja hallitsee eri näkymiä."""
@@ -16,7 +18,7 @@ class UI:
 
         self._root = root
         self._current_view = None
-        ManagementService().add_default_quizzes()
+        #ManagementService().add_default_quizzes()
 
 
     def _hide_current_view(self):
@@ -28,13 +30,13 @@ class UI:
         """Luo käyttöliittymän aloitusnäkymän."""
         self._show_opening_view()
 
-    def _show_create_quiz_view(self, quiz=None):
+    def _show_create_quiz_view(self, quiz=Quiz("", [])):
         self._hide_current_view()
 
         self._current_view = QuizCreationView(
             self._root,
             self._show_opening_view,
-            quiz
+            EditService(quiz)
         )
 
         self._current_view.pack()

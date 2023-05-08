@@ -26,14 +26,13 @@ class OpeningView:
         """Sulkee näkymän."""
         self._frame.destroy()
 
-    def _selected_quiz_name(self):
+    def _get_selected_quiz_name(self):
         value = self._quiz_list.curselection()
 
         if not value:
             return None
         
         return self._quiz_list.get(value)
-
 
     def pack(self):
         """Näyttää näkymän."""
@@ -42,10 +41,31 @@ class OpeningView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
+        self._init_header()        
+        self._init_quiz_list()
+        self._init_left_panel()
+        self._init_footer()
+
+    def _init_footer(self):
         start_game_button = ttk.Button(
             master=self._frame,
             text="Aloita peli",
             command=lambda: self.__take_action(self._handle_game_view)
+        )
+
+        start_game_button.grid(
+            row=5, 
+            column=0,
+            columnspan=2,
+            padx=10, 
+            pady=20
+        )
+
+    def _init_left_panel(self):
+        create_quiz_button = ttk.Button(
+            master=self._frame,
+            text="Luo uusi peli",
+            command=self._handle_new_quiz_view
         )
 
         modify_button = ttk.Button(
@@ -54,32 +74,64 @@ class OpeningView:
             command=lambda: self.__take_action(self._handle_new_quiz_view)
         )
 
-        create_quiz_button = ttk.Button(
+        delete_button = ttk.Button(
             master=self._frame,
-            text="Luo uusi peli",
-            command=self._handle_new_quiz_view
+            text="Poista",
+            command=""
         )
 
+        create_quiz_button.grid(
+            row=1, 
+            column=1, 
+            padx=10, 
+            pady=(20, 0), 
+            sticky=constants.N
+        )
+
+        modify_button.grid(
+            row=2, 
+            column=1, 
+            padx=10, 
+            pady=0, 
+            sticky=constants.N
+        )
+
+        delete_button.grid(
+            row=3, 
+            column=1, 
+            padx=10, 
+            pady=0, 
+            sticky=constants.N
+        )
+
+    def _init_header(self):
         quiz_label = ttk.Label(
             master=self._frame, 
             text="Tallennetut visailut:",
             font=("Helvetica", 12, "bold")
         )
-        
-        self._quiz_list = Listbox(
-            master=self._frame
+
+        quiz_label.grid(
+            row=0, 
+            column=0, 
+            sticky=constants.W
         )
 
-        quiz_names = management_service.get_quiz_names()
+    def _init_quiz_list(self):
+        self._quiz_list = Listbox(master=self._frame)
 
+        quiz_names = management_service.get_quiz_names()
         for counter, quiz_name in enumerate(quiz_names):
             self._quiz_list.insert(counter, quiz_name)
 
-        quiz_label.grid(row=0, column=0, columnspan=2, sticky=constants.W)
-        self._quiz_list.grid(row=1, column=0, columnspan=3, sticky=constants.EW)
-        start_game_button.grid(row=2, column=0, padx=10, pady=10)
-        modify_button.grid(row=2, column=1, padx=10, pady=10)
-        create_quiz_button.grid(row=2, column=2, padx=10, pady=10)
+        self._quiz_list.grid(
+            row=1, 
+            column=0,
+            rowspan=4,
+            padx=10,
+            pady=10,
+            sticky=constants.EW
+        )
     
     def _show_quiz_messagebox(self):
         messagebox.showinfo(
@@ -88,7 +140,7 @@ class OpeningView:
         )
 
     def __take_action(self, action_handle):
-        quiz_name = self._selected_quiz_name()
+        quiz_name = self._get_selected_quiz_name()
 
         if not quiz_name:
             self._show_quiz_messagebox()

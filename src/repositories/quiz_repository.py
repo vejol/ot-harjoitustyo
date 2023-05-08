@@ -21,6 +21,15 @@ class QuizRepository:
             "DELETE FROM Puzzles"
         )
 
+    def delete_quiz(self, quiz):
+        cursor = self._connection.cursor()
+
+        cursor.execute("SELECT id FROM Quizzes WHERE name=?", [quiz.name])
+        quiz_id = cursor.fetchall()[0][0]
+
+        cursor.execute("DELETE FROM Quizzes WHERE (name=?)", [quiz.name])
+        cursor.execute("DELETE FROM Puzzles WHERE (quiz_id=?)", [quiz_id])
+
     def find_all_quizzes(self):
         """Palauttaa kaikki tietokantaan tallennetut visailut.
 
@@ -89,7 +98,7 @@ class QuizRepository:
         return Quiz(name, puzzles)
 
 
-    def save(self, quiz):
+    def save_quiz(self, quiz):
         """Tallentaa annetun visailun tietokantaan.
 
         Args:
@@ -103,24 +112,31 @@ class QuizRepository:
             [quiz.name]
         )
 
-        for count, puzzle in enumerate(quiz.puzzles):
-            cursor.execute(
-                '''INSERT INTO Puzzles (
-                        name, 
-                        order_no, 
-                        quiz_id, 
-                        word1, 
-                        word2, 
-                        word3, 
-                        word4, 
-                        word5)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-                [puzzle.name,
-                 count + 1,
-                 cursor.lastrowid,
-                 puzzle.words[0],
-                 puzzle.words[1],
-                 puzzle.words[2],
-                 puzzle.words[3],
-                 puzzle.words[4]]
-            )
+        quiz_id = cursor.lastrowid
+
+        for order_no, puzzle in enumerate(quiz.puzzles):
+            self._save_puzzle(order_no, puzzle, quiz_id, cursor)
+
+        self._connection.commit()
+
+    def _save_puzzle(self, order_no, puzzle, quiz_id, cursor):
+        cursor.execute(
+            '''INSERT INTO Puzzles (
+                    name, 
+                    order_no, 
+                    quiz_id, 
+                    word1, 
+                    word2, 
+                    word3, 
+                    word4, 
+                    word5)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+            [puzzle.name,
+                order_no,
+                quiz_id,
+                puzzle.words[0],
+                puzzle.words[1],
+                puzzle.words[2],
+                puzzle.words[3],
+                puzzle.words[4]]
+        )

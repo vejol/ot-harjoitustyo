@@ -9,7 +9,7 @@ class Puzzle:
                   yhdessä visailussa voi olla useampia arvoituksia.
     """
 
-    def __init__(self, name, words, order_no):
+    def __init__(self, name, words, order_no=1):
         """Luokan konstruktori. Luo uuden arvoitusta kuvaavan olion.
 
         Args:

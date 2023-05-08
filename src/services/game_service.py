@@ -34,7 +34,7 @@ class GameService:
     def dec_point(self, team):
         self._points[team] -= 1
         return self._points[team]
-    
+
     def get_answer(self):
         return self._current_puzzle.name
 

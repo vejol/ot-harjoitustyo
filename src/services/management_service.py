@@ -7,7 +7,7 @@ class ManagementService:
 
     def __init__(self):
         """Luokan konstruktori. Luo uuden sovelluksen logiikasta vastaavan palvelun."""
-        self._quiz_repository = QuizRepository()
+        self._repository = QuizRepository()
 
 
     def add_quiz(self, quiz):
@@ -17,14 +17,15 @@ class ManagementService:
             quiz: Lisättävä Quiz-olio.
         """
 
-        self._quiz_repository.save(quiz)
+        self._repository.save_quiz(quiz)
 
 
     def add_default_quizzes(self):
         """Lisää sovellukseen mallivisailut."""
 
         puzzle1 = Puzzle("Maamme-laulu", ["laaksoa", "ei", "kukkulaa", "ei", "vettä"], 1)
-        puzzle2 = Puzzle("Kalliolle kukkulalle", ["kalliolle", "kukkulalle", "rakennan", "minä", "majani"], 2)
+        puzzle2 = Puzzle("Kalliolle kukkulalle",
+                         ["kalliolle", "kukkulalle", "rakennan", "minä", "majani"], 2)
         puzzle3 = Puzzle("Petteri Punakuono", ["pitkä", "on", "taival", "valoton,", "Petteri"], 1)
 
         self.add_quiz(Quiz("Suomivisa", [puzzle1, puzzle2]))
@@ -38,7 +39,7 @@ class ManagementService:
             Lista, joka sisältää tallennettujen visailujen nimet.
         """
 
-        return self._quiz_repository.find_quiz_names()
+        return self._repository.find_quiz_names()
 
 
     def find_all_quizzes(self):
@@ -47,7 +48,7 @@ class ManagementService:
         Returns:
             Lista, joka sisältää kaikki ohjelmaan tallennetut visailut Quiz-olioina.
         """
-        return self._quiz_repository.find_all_quizzes()
+        return self._repository.find_all_quizzes()
 
 
     def get_quiz(self, name):
@@ -60,13 +61,7 @@ class ManagementService:
             Quiz-olio, joka vastaa parametriksi annettua visailun nimeä.
         """
 
-        return self._quiz_repository.find_quiz(name)
-    
-    def create_puzzle(self, input: list):
-        stripped_input = [s.strip() for s in input]
-        if "" in stripped_input:
-            return "Täytä kaikki kentät."
-        pass
+        return self._repository.find_quiz(name)
 
 
 management_service = ManagementService()

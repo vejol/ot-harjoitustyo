@@ -9,14 +9,14 @@ class TestQuizRepository(unittest.TestCase):
         self.quiz_repository = QuizRepository()
         self.quiz_repository.delete_all()
     
-    def test_save(self):
+    def test_save_quiz(self):
         puzzle1 = Puzzle("Test Puzzle 1", ["ONE", "TWO", "THREE", "FOUR", "FIVE"], 1)
         puzzle2 = Puzzle("Test Puzzle 2", ["SIX", "SEVEN", "EIGHT", "NINE", "TEN"], 1)
         quiz1 = Quiz("Test Quiz 1", [puzzle1])
         quiz2 = Quiz("Test Quiz 2", [puzzle2])
 
-        self.quiz_repository.save(quiz1)
-        self.quiz_repository.save(quiz2)
+        self.quiz_repository.save_quiz(quiz1)
+        self.quiz_repository.save_quiz(quiz2)
 
         names = self.quiz_repository.find_quiz_names()
         quiz1 = self.quiz_repository.find_quiz(names[0])
@@ -42,8 +42,8 @@ class TestQuizRepository(unittest.TestCase):
         quiz1 = Quiz("Test Quiz 1", [puzzle1])
         quiz2 = Quiz("Test Quiz 2", [puzzle2])
 
-        self.quiz_repository.save(quiz1)
-        self.quiz_repository.save(quiz2)
+        self.quiz_repository.save_quiz(quiz1)
+        self.quiz_repository.save_quiz(quiz2)
 
         names = self.quiz_repository.find_quiz_names()
 
