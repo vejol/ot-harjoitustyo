@@ -32,4 +32,8 @@
 ## Viikko 7 
 - Lisätty pelinäkymään joukkueen 2 pistelaskuri
 - Lisätty pelinäkymään oikean vastauksen paljastamistoiminto
+- Lisätty pelinäkymään toiminto, joka siirtää näkymän seuraavaan arvoitukseen
 - Muutettu visailunluomisnäkymää niin, että uuden arvoituksen tiedot annetaan erillisessä ikkunassa
+- Lisätty luokka EditService, joka tarjoaa palvelut visailun muokkaamiseen ja joka muistaa muokkaamisen sen hetkisen tilan
+- Toteutettu visailunluomisnäkymän toiminnallisuus ja tietokantaan tallentaminen
+- Lisätty aloitusnäkymään toiminnot visailujen muokkaamiseen ja poistamiseen

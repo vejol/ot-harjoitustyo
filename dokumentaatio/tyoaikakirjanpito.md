@@ -29,5 +29,9 @@
 |       | 1 | Lisätty pelinäkymään oikean vastauksen näyttämistoiminto ja toteutettu sitä vastaava logiikka |
 |       | 3 | Lisätty pelinäkymään ja gameserviceen mahdollisuus siirtyä seuraavaan arvoitukseen |
 | 7.5.  | 5 | Lisätty luokka PuzzleCreationWindow uusien visailujen lisäämiseen |
+| 8.5.  | 2 | EditView-näkymän refaktorointia |
+|       | 1 | Lisätty EditService-luokka
+|       | 4 | Toteutettu visailujen luomis-, muokkaus- ja poistamistoiminnot ja tarvittava tietokantalogiikka |
+| 9.5.  | 2 | Päivitetty dokumentaatiota |
 
-| Yht.  | 63 | |
+| Yht.  | 72 | |

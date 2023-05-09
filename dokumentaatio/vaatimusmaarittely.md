@@ -17,45 +17,47 @@ Aluksi sovelluksessa on ainoastaan yksi käyttäjä, _normaali käyttäjä_. My�
 Käyttöliittymässä on kolme näkymää:
 
 - Aloitusnäkymä (**tehty**)
-- Pelinäkymä (**tehty osittain**)
-- Luo uusi peli -näkymä (**tehty osittain**)
+- Pelinäkymä (**tehty**)
+- Luo uusi peli -näkymä (**tehty**)
 
 ### Sovelluksen käynnistäminen
-Käynnistäessä avautuu aloitusnäkymä:
+Käynnistäessä avautuu aloitusnäkymä, jossa on:
 
 - Listaus tallennetuista visailuista (**tehty**)
 - Mahdollisuus valita haluamansa visailu ja aloittaa peli (**tehty**)
-- Painikkeet pelitilaan ja muokkaustilaan (**tehty**)
+- Painikkeet visailujen luomiseen, muokkaamiseen ja poistamiseen (**tehty**)
 
 ### Uuden visailun luominen
-Käyttäjä voi luoda uuden visailun, jossa on x määrä arvaustehtäviä. Käyttäjä valitsee jokaiseen tehtävään 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi tehtävän yhteyteen voi liittää muita lisätietoja, kuten kappaleen nimen, esittäjän tai julkaisuvuoden. Näitä tietoja ei näytetä visailun aikana, vaan ne ovat ainoastaan käyttäjän omaan käyttöön.
+Käyttäjä voi luoda uuden visailun, jossa on käyttäjän valitsema määrä arvoituksia. Käyttäjä valitsee jokaiseen arvoitukseen 5 luukkuihin piilotettavaa sanaa. Sanat tulee olla peräkkäisiä sanoja jonkun laulun sanoituksesta. Lisäksi arvoitukselle annetaan 
 
 Teknisiä vaatimuksia visailun luomiselle:
 
 - Käyttäjä antaa visailulle nimen (**tehty**)
-- Käyttäjä voi liittää visailuun haluamansa määrän arvaustehtäviä
+- Käyttäjä voi liittää visailuun haluamansa määrän arvoituksia (**tehty**)
 - Käyttäjä voi päättää arvaustehtävään piilotettavat sanat (**tehty**)
 - Sovellus tarkistaa lopuksi, että mikään vaadituista kentistä ei ole tyhjänä
-- Visailu tallennetaan tietokantaan (**tehty osittain**)
+- Visailu tallennetaan tietokantaan (**tehty**)
 
 ### Tallennettujen visailujen selaileminen
-Käyttäjä voi katsoa järjestelmään tallennettujen visailujen tietoja.
+Käyttäjä voi katsoa järjestelmään tallennettujen visailujen tietoja. (**tehty**)
 
 ### Pelaaminen
 - Käyttäjä voi käynnistää tallennetun visailun. (**tehty**)
-- Sovellus näyttää tallennettuja tehtäviä yksi kerrallaan. (**tehty osittain**)
+- Sovellus näyttää tallennettuja tehtäviä yksi kerrallaan. (**tehty**)
 - Käyttäjä voi klikata pelinäkymän luukkuja auki haluamassaan järjestyksessä. (**tehty**)
-- Käyttäjä voi lisätä pisteitä joukkueille (**tehty osittain**)
-- Käyttäjä voi siirtyä seuraavaan arvoitukseen
+- Käyttäjä voi lisätä pisteitä joukkueille (**tehty**)
+- Käyttäjä voi siirtyä seuraavaan arvoitukseen (**tehty**)
 
 ## Jatkokehitysideoita 
 Perusversion toteutuksen jälkeen sovellukseen on mahdollista lisätä ajan salliessa esimerkiksi seuraavia ominaisuuksia:
-- Käyttäjä voi muokata aiemmin tallennettuja visailuja
 - Visailuun voi liittää bonuskysymyksen, johon tehtävän ratkaissut joukkue saa yrittää vastata. Bonuskysymyksestä voi saada ylimääräisen pisteen
 
 ### Pelin hallintapaneeli
-Sovellukseen voi toteuttaa pelinjohtajalle pelin ohjaamiseen tarvittavia painikkeita:
+Ideaalitilanteessa pelinäkymän painikkeet olisi eriytettynä omaan ikkunaansa, "hallintapaneeliin". Hallintapaneelin ja pelinäkymän kokonaisuus olisi luenteeltaan samanlainen kuin Powerpoint-esityksen presentation view: opettaja voisi heijastaa pelinäkymän hdmi-portin kautta oppilaiden nähtäville ja hallintapaneeli olisi nähdävillä vain opettajan tietokoneelta. Näin pelinäkymästä tulisi siistimpi, koska mitään painikkeita ei tarvitsisi olla näkyvillä, ja lisäksi hallintapaneelissa voisi näyttää vain pelinjohtajalle kuuluvaa tietoa, kuten oikean vastauksen ja muita lisätietoja.
+
+Hallintapaneeliin voisi toteuttaa esimerkiksi painikkeita:
+- luukkujen avaamiseen
 - pisteiden lisäämiseen ja vähentämiseen
 - sen ilmaisemiseen, oliko joukkeen antama vastaus oikein vai väärin
-- vuoron vaihtamiseen
+- pelivuoron vaihtamiseen
 - pelin päättämiseen

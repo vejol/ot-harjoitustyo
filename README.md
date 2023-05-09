@@ -30,7 +30,7 @@ Sovellus on suunniteltu Python-versiolla `3.8`. Vanhempien python-versioiden kan
 poetry install
 ```
 
-2. Tietokannan alustus tulee suorittaa ennen ensimmäistä käynnistyskertaa komennolla:
+2. Ennen ensimmäistä käyttökertaa tietokanta pitää alustaa. Toimenpide luo tarvittavat tietokantataulut ja lisää tietokantaan mallivisailut. Alustaminen suoritetaan komennolla:
 
 ```bash
 poetry run invoke build
