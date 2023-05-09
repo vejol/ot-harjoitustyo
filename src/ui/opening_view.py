@@ -5,18 +5,19 @@ from services.management_service import management_service
 class OpeningView:
     """Luokka, joka vastaa ohjelman käyttöliittymän aloitusnäkymästä."""
 
-    def __init__(self, root, hande_game_view, handle_edit_view):
+    def __init__(self, root, handle_game_view, handle_edit_view):
         """Luokan konstruktori. Luo uuden aloitusnäkymän.
 
         Args:
             root: TKinter-elementti, joka sisältää ohjelman ikkunan.
-            hande_game_view: Arvo, jota kutsumalla avautuu uusi pelinäkymä.
+            handle_game_view: Arvo, jota kutsumalla avautuu uusi pelinäkymä.
             handle_edit_view: Arvo, jota kutsumalla avautuu uusi visailujenluomisnäkymä.
         """
 
         self._root = root
-        self._handle_game_view = hande_game_view
+        self._handle_game_view = handle_game_view
         self._handle_edit_view = handle_edit_view
+
         self._quiz_list = None
         self._frame = None
 
@@ -37,6 +38,14 @@ class OpeningView:
     def pack(self):
         """Näyttää näkymän."""
         self._frame.pack(fill=constants.X, padx=10, pady=10)
+
+    def _handle_delete_quiz(self):
+        self._take_action(management_service.delete_quiz)
+        
+        if self._quiz_list:
+            self._quiz_list.destroy()
+
+        self._init_quiz_list()
             
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -60,6 +69,16 @@ class OpeningView:
             padx=10, 
             pady=20
         )
+
+    def _init_header(self):
+
+        quiz_label = ttk.Label(
+            master=self._frame, 
+            text="Tallennetut visailut:",
+            font=("Helvetica", 12, "bold")
+        )
+
+        quiz_label.grid()
 
     def _init_left_panel(self):
         create_quiz_button = ttk.Button(
@@ -104,19 +123,6 @@ class OpeningView:
             sticky=constants.N
         )
 
-    def _init_header(self):
-        quiz_label = ttk.Label(
-            master=self._frame, 
-            text="Tallennetut visailut:",
-            font=("Helvetica", 12, "bold")
-        )
-
-        quiz_label.grid(
-            row=0, 
-            column=0, 
-            sticky=constants.W
-        )
-
     def _init_quiz_list(self):
         self._quiz_list = Listbox(master=self._frame)
 
@@ -132,15 +138,7 @@ class OpeningView:
             pady=10,
             sticky=constants.EW
         )
-    
-    def _handle_delete_quiz(self):
-        self._take_action(management_service.delete_quiz)
-        
-        if self._quiz_list:
-            self._quiz_list.destroy()
 
-        self._init_quiz_list()
-    
     def _show_quiz_messagebox(self):
         messagebox.showinfo(
             title="Valitse visailu", 

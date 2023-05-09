@@ -1,7 +1,7 @@
+from config import BLUE_IMG_FILE_PATH, RED_IMG_FILE_PATH
 from services.game_service import GameService
 from tkinter import ttk, Label, Frame, constants
 from PIL import Image, ImageTk
-import os
 
 class GameView:
     """Luokka, joka vastaa pelinäkymästä."""
@@ -17,11 +17,11 @@ class GameView:
 
         self._root = root
         self._handle_opening_view = handle_opening_view
-        self._game_service = game_service
+        self._service = game_service
 
         self._frame = None
-        self._blue_field_img = None
-        self._red_field_img = None
+        self._blue_img = None
+        self._red_img = None
         self._quiz_fields = []
 
         self._initialize()
@@ -36,11 +36,46 @@ class GameView:
         self._frame.pack()
         self._root.attributes('-fullscreen', True)
 
+    def _handle_add_point(self, team, handle_label):
+        points = self._service.add_point(team)
+        handle_label.config(text=points)
+
+    def _handle_dec_point(self, team, handle_label):
+        points = self._service.dec_point(team)
+        handle_label.config(text=points)
+    
+    def _handle_next_puzzle(self):
+        if self._service.puzzles_left():
+            self._service.next_puzzle()
+            self._reset_view()
+
+    def _handle_quit_game(self):
+        self._handle_opening_view()
+
+    def _handle_reveal_answer(self):
+        answer = self._service.get_answer()
+        
+        answer_label = Label(master=self._frame,
+            text=answer,
+            font="Helvetica 24 bold",
+            fg="#FFFFFF",
+            bg="#1E3E5D"
+        )
+        
+        answer_label.grid(row=4,column=0, columnspan=5)
+        self.pack()
+
+    def _handle_reveal_word(self, n: int):
+        word = self._service.reveal_field(n)
+        self._quiz_fields[n].config(text=word)
+        if self._service.red_word(n):
+            self._quiz_fields[n].config(image=self._red_img)
+
     def _initialize(self):
         self._frame = Frame(master=self._root, bg="#1E3E5D")
-        self._initialize_images()
+        self._init_images()
 
-        self._initialize_quiz_fields()
+        self._init_quiz_fields()
         self._pack_quiz_fields()
 
         team1_points_frame = self._init_point_counter("team1", "Joukkue 1:n\npisteet")
@@ -67,31 +102,24 @@ class GameView:
             command=self._handle_quit_game
         )
 
-
         self._root.grid_columnconfigure(0, weight=1)
         reveal_answer_button.grid(row=5, column=0)
 
-        if self._game_service.puzzles_left():
+        if self._service.puzzles_left():
             next_quiz_button.grid(row=5, column=1)
 
         quit_button.grid(row=5, column=4, pady=20)
 
-    def _initialize_images(self):
-        current_path = os.path.dirname(__file__)
-        img_path = os.path.join(current_path, "..", "..", "img")
-        self._blue_field_img = self._init_field_img(os.path.join(img_path, "blue.png"))
-        self._red_field_img = self._init_field_img(os.path.join(img_path, "red.png"))
-
-    def _init_field_img(self, dirname):
-        img = Image.open(dirname)
+    def _init_images(self):
+        img = Image.open(BLUE_IMG_FILE_PATH)
         img_size = self._root.winfo_screenwidth() // 6
         resized_img = img.resize((img_size, img_size))
-        return ImageTk.PhotoImage(resized_img)
+        self._blue_img = ImageTk.PhotoImage(resized_img)
 
-    def _pack_quiz_fields(self):
-        for i in range(len(self._quiz_fields)):
-            pad_size = self._root.winfo_screenwidth() // 60
-            self._quiz_fields[i].grid(row=0, column=i, padx=pad_size, pady=pad_size)
+        img = Image.open(RED_IMG_FILE_PATH)
+        img_size = self._root.winfo_screenwidth() // 6
+        resized_img = img.resize((img_size, img_size))
+        self._red_img = ImageTk.PhotoImage(resized_img)
     
     def _init_point_counter(self, team, label_text):
         points_frame = Frame(master=self._frame, bg="#1E3E5D")
@@ -104,7 +132,7 @@ class GameView:
             )
 
         points_label = Label(master=points_frame,
-            text=self._game_service.get_points(team),
+            text=self._service.get_points(team),
             font=("Helvetica", 60),
             fg="#FFFFFF",
             bg="#1E3E5D"
@@ -113,14 +141,14 @@ class GameView:
         dec_point_button = ttk.Button(
             master=points_frame,
             text="-",
-            command=lambda: self._dec_point(team, points_label),
+            command=lambda: self._handle_dec_point(team, points_label),
             width=3
         )
 
         add_point_button = ttk.Button(
             master=points_frame,
             text="+",
-            command=lambda: self._add_point(team, points_label),
+            command=lambda: self._handle_add_point(team, points_label),
             width=3
         )
 
@@ -131,57 +159,29 @@ class GameView:
 
         return points_frame
 
-    def _add_point(self, team, points_label):
-        points = self._game_service.add_point(team)
-        points_label.config(text=points)
+    def _init_quiz_fields(self):
 
-    def _dec_point(self, team, points_label):
-        points = self._game_service.dec_point(team)
-        points_label.config(text=points)
+        for i in range(5):
 
-    def _initialize_quiz_fields(self):
-
-        for i in range(1, 6):
             label = Label(master=self._frame,
-                text=str(i),
+                text=str(i+1),
                 font=("Calibri", 26),
                 fg="#FFFFFF",
                 bg="#1E3E5D",
-                image=self._blue_field_img,
+                image=self._blue_img,
                 compound="center"
                 )
-            label.bind("<Button-1>", lambda event, n=i-1: self._handle_reveal_word(n))
+
+            label.bind("<Button-1>", lambda event, n=i: self._handle_reveal_word(n))
             self._quiz_fields.append(label)
 
-    
-    def _handle_quit_game(self):
-        self._handle_opening_view()
-
-    def _handle_reveal_answer(self):
-        answer = self._game_service.get_answer()
-        answer_label = Label(master=self._frame,
-            text=answer,
-            font="Helvetica 24 bold",
-            fg="#FFFFFF",
-            bg="#1E3E5D"
-        )
-        
-        answer_label.grid(row=4,column=0, columnspan=5)
-        self.pack()
+    def _pack_quiz_fields(self):
+        for i in range(len(self._quiz_fields)):
+            pad_size = self._root.winfo_screenwidth() // 60
+            self._quiz_fields[i].grid(row=0, column=i, padx=pad_size, pady=pad_size)
 
     def _reset_view(self):
         self._frame.destroy()
         self._quiz_fields = []
         self._initialize()
         self.pack()
-
-    def _handle_next_puzzle(self):
-        if self._game_service.puzzles_left():
-            self._game_service.next_puzzle()
-            self._reset_view()
-
-    def _handle_reveal_word(self, n: int):
-        word = self._game_service.reveal_field(n)
-        self._quiz_fields[n].config(text=word)
-        if self._game_service.is_red_word(n):
-            self._quiz_fields[n].config(image=self._red_field_img)

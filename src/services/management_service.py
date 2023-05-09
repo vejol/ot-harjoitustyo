@@ -18,7 +18,7 @@ class ManagementService:
         """
 
         self._repository.save_quiz(quiz)
-    
+
     def delete_quiz(self, quiz_name):
         self._repository.delete_quiz(quiz_name)
 

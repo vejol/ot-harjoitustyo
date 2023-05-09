@@ -11,3 +11,9 @@ except FileNotFoundError:
 
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
 DATABASE_FILE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)
+
+BLUE_IMG_FILENAME = os.getenv("BLUE_IMG_FILENAME") or "blue.png"
+BLUE_IMG_FILE_PATH = os.path.join(dirname, "..", "img", BLUE_IMG_FILENAME)
+
+RED_IMG_FILENAME = os.getenv("RED_IMG_FILENAME") or "red.png"
+RED_IMG_FILE_PATH = os.path.join(dirname, "..", "img", RED_IMG_FILENAME)

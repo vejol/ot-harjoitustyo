@@ -41,7 +41,7 @@ class GameService:
     def get_points(self, team):
         return self._points[team]
 
-    def is_red_word(self, index):
+    def red_word(self, index):
         """Kertoo, onko kyseisen indeksin sana punainen.
 
         Args:
