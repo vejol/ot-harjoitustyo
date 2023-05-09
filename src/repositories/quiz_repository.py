@@ -22,6 +22,11 @@ class QuizRepository:
         )
 
     def delete_quiz(self, quiz):
+        """Poistaa tietokannasta annetun visailun tiedot.
+
+        Args:
+            quiz (Quiz): Quiz-olio, joka kuvaa poistettavaa oliota.
+        """
         cursor = self._connection.cursor()
 
         cursor.execute("SELECT id FROM Quizzes WHERE name=?", [quiz.name])
