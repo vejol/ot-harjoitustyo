@@ -5,9 +5,9 @@ from entities.quiz import Quiz
 class ManagementService:
     """Luokka, joka vastaa sovelluksen logiikasta."""
 
-    def __init__(self):
+    def __init__(self, repository):
         """Luokan konstruktori. Luo uuden sovelluksen logiikasta vastaavan palvelun."""
-        self._repository = QuizRepository()
+        self._repository = repository
 
 
     def add_quiz(self, quiz):
@@ -67,4 +67,4 @@ class ManagementService:
         return self._repository.find_quiz(name)
 
 
-management_service = ManagementService()
+management_service = ManagementService(QuizRepository())

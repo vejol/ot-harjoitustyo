@@ -83,7 +83,7 @@ class GameView:
         handle_label.config(text=points)
     
     def _handle_next_puzzle(self):
-        if self._service.puzzles_left():
+        if self._service.puzzles_available():
             self._service.next_puzzle()
             self._reset_view()
 
@@ -104,7 +104,7 @@ class GameView:
         self.pack()
 
     def _handle_reveal_word(self, n: int):
-        word = self._service.reveal_field(n)
+        word = self._service.get_word(n)
         self._quiz_fields[n].config(text=word)
         if self._service.red_word(n):
             self._quiz_fields[n].config(image=self._red_img)
@@ -143,7 +143,7 @@ class GameView:
         self._root.grid_columnconfigure(0, weight=1)
         reveal_answer_button.grid(row=5, column=0)
 
-        if self._service.puzzles_left():
+        if self._service.puzzles_available():
             next_quiz_button.grid(row=5, column=1)
 
         quit_button.grid(row=5, column=4, pady=20)

@@ -13,7 +13,6 @@ class GameService:
         self._quiz = quiz
         self._current_puzzle = None
         self._points = {"team1": 0, "team2": 0}
-        self._revealed = [False] * 5
         self._red_words = []
         self._initialize_puzzle()
 
@@ -24,7 +23,7 @@ class GameService:
     def next_puzzle(self):
         self._initialize_puzzle()
 
-    def puzzles_left(self):
+    def puzzles_available(self):
         return len(self._quiz.puzzles) > 0
 
     def add_point(self, team):
@@ -53,7 +52,7 @@ class GameService:
 
         return index in self._red_words
 
-    def reveal_field(self, index):
+    def get_word(self, index):
         """Paljastaa valitun sanan.
 
         Args:
@@ -63,5 +62,4 @@ class GameService:
             Merkkijono, joka kertoo paljastuneen sanan.
         """
 
-        self._revealed[index] = True
         return self._current_puzzle.words[index]

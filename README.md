@@ -1,6 +1,6 @@
-# Musiikkivisa-sovellus
+# Musiikkivisa
 
-Sovellus on Bumtsibum-visailuohjelmaan perustuva peli, joka on suunnattu peruskoulun ja lukion musiikinopettajien käyttöön. Sovelluksessa opettaja voi luoda visailuja, joita voidaan sitten pelata oppilasryhmän kanssa. Oppilasryhmä jaetaan kahteen joukkueeseen ja opettaja toimii pelinjohtajana, joka tietää oikeat vastaukset ja jakaa pisteitä oman harkintansa mukaan.
+Musiikkivisa on [Bumtsibum](https://fi.wikipedia.org/wiki/Bumtsibum)-visailuohjelmaan perustuva peli, joka on suunnattu peruskoulun ja lukion musiikinopettajien käyttöön. Sovelluksessa opettaja voi luoda visailuja, joita voidaan sitten pelata oppilasryhmän kanssa. Oppilasryhmä jaetaan kahteen joukkueeseen ja opettaja toimii pelinjohtajana, joka tietää oikeat vastaukset ja jakaa pisteitä oman harkintansa mukaan.
 
 Pelinäkymässä on viisi numeroitua luukkua, joiden jokaisen taakse on piilotettu jokin sana. Vuorossa oleva joukkue valitsee ensin avattavan luukun. Sitten joukkueen tehtävänä on keksiä mikä tahansa laulu, jossa luukusta paljastunut sana esiintyy. Arvaus tehdään laulamalla kyseistä laulua. Tässä onnistuessaan joukkue saa itselleen uuden arvausvuoron ja voi avata uuden luukun. Toisaalta jos joukkueen arvaama laulu on opettajan tarkoittama tehtävään piilotettu laulu, kierros päättyy ja joukkue saa pisteen.
 

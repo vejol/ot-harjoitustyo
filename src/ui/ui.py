@@ -1,8 +1,8 @@
 from ui.game_view import GameView
 from ui.opening_view import OpeningView
 from ui.edit_view import EditView
+from repositories.quiz_repository import QuizRepository
 from services.game_service import GameService
-from services.management_service import ManagementService
 from services.edit_service import EditService
 from entities.quiz import Quiz
 
@@ -34,7 +34,7 @@ class UI:
         self._current_view = EditView(
             self._root,
             self._show_opening_view,
-            EditService(quiz)
+            EditService(quiz, QuizRepository())
         )
 
         self._current_view.pack()

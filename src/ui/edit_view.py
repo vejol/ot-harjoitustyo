@@ -1,5 +1,5 @@
 from tkinter import ttk, constants, Frame, Toplevel, INSERT, messagebox
-from services.edit_service import EditService, QuizExistError, NoQuizNameError
+from services.edit_service import *
 
 class EditView:
     """Luokka, joka vastaa visailujen luomiseen tarkoitetusta näkymästä."""
@@ -121,12 +121,21 @@ class EditView:
 
         except QuizExistError:
             messagebox.showinfo(
-                title="Saman niminen visailu on jo olemassa", 
+                title="Virheellinen nimi", 
                 message="Saman niminen visailu on jo olemassa, valitse jokin toinen nimi."
             )
             return
+        
+        try:
+            self._service.save_quiz()
 
-        self._service.save_quiz()
+        except NoPuzzlesError:
+            messagebox.showinfo(
+                title="Ei arvoituksia",
+                message="Lisää vähintään yksi arvoitus, jotta voit tallentaa visailun."
+            )
+            return
+
         self._handle_opening_view()
 
 
@@ -308,10 +317,48 @@ class PuzzleCreationWindow:
         input_frame.grid(row=0, column=0, columnspan=2)
     
     def _handle_save_changes(self):
-        input = self._get_inserted_text()
-        error_message = self._service.add_puzzle(input)
-        if error_message:
-            pass
+        user_input = self._get_inserted_text()
+        name  = user_input[0]
+        words = user_input[1:]
+ 
+        try:
+            self._service.add_puzzle(name, words)
+
+        except NoPuzzleNameError:
+            messagebox.showinfo(
+                title="Nimi puuttuu", 
+                message="Anna arvoitukselle ensin jokin nimi!"
+            )
+            return
+        
+        except PuzzleNameLenghtError:
+            messagebox.showinfo(
+                title="Liian pitkä nimi", 
+                message="Syötetty nimi on liian pitkä. Anna nimi, jonka pituus on enintään 100 merkkiä."
+            )
+            return
+
+        except NoPuzzleWordError:
+            messagebox.showinfo(
+                title="Piilotettava sana puuttuu", 
+                message="Yksi tai useampi piilotettava sana puuttuu. Syötä ensin sana jokaiseen sanakenttään."
+            )
+            return
+
+        except MultipleWordsError:
+            messagebox.showinfo(
+                title="Useita sanoja sanakentässä", 
+                message="Syötä vain yksi sana kuhunkin sanakenttään. Älä käytä välilyöntejä."
+            )
+            return
+    
+        except PuzzleWordLenghtError:
+            messagebox.showinfo(
+                title="Liian pitkä sana", 
+                message="Yksi tai useampi piilotettava sana on liian pitkä. Varmista, että kunkin sanan pituus on enintään 12 merkkiä."
+            )
+            return
+        
         self._handle_update()
         self._window.destroy()
 
