@@ -1,6 +1,6 @@
-from repositories.quiz_repository import QuizRepository
 from entities.puzzle import Puzzle
 from entities.quiz import Quiz
+from repositories.quiz_repository import QuizRepository
 
 class ManagementService:
     """Luokka, joka vastaa sovelluksen logiikasta."""
@@ -65,6 +65,3 @@ class ManagementService:
         """
 
         return self._repository.find_quiz(name)
-
-
-management_service = ManagementService(QuizRepository())

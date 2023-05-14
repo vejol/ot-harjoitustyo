@@ -2,8 +2,9 @@ from ui.game_view import GameView
 from ui.opening_view import OpeningView
 from ui.edit_view import EditView
 from repositories.quiz_repository import QuizRepository
-from services.game_service import GameService
 from services.edit_service import EditService
+from services.game_service import GameService
+from services.management_service import ManagementService
 from entities.quiz import Quiz
 
 class UI:
@@ -19,14 +20,14 @@ class UI:
         self._root = root
         self._current_view = None
 
+    def start(self):
+        """Luo käyttöliittymän aloitusnäkymän."""
+        self._show_opening_view()
+
     def _hide_current_view(self):
         if self._current_view:
             self._current_view.destroy()
         self._current_view = None
-
-    def start(self):
-        """Luo käyttöliittymän aloitusnäkymän."""
-        self._show_opening_view()
 
     def _show_create_quiz_view(self, quiz=Quiz("", [])):
         self._hide_current_view()
@@ -58,7 +59,8 @@ class UI:
         self._current_view = OpeningView(
             self._root,
             self._show_game_view,
-            self._show_create_quiz_view
+            self._show_create_quiz_view,
+            ManagementService(QuizRepository())
         )
 
         self._current_view.pack()

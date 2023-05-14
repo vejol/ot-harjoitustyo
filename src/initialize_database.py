@@ -10,13 +10,8 @@ def drop_tables(connection):
 
     cursor = connection.cursor()
 
-    cursor.execute('''
-        DROP TABLE IF EXISTS Quizzes;
-    ''')
-
-    cursor.execute('''
-        DROP TABLE IF EXISTS Puzzles;
-    ''')
+    cursor.execute("DROP TABLE IF EXISTS Quizzes;")
+    cursor.execute("DROP TABLE IF EXISTS Puzzles;")
 
     connection.commit()
 

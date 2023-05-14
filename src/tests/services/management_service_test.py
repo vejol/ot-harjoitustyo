@@ -35,7 +35,11 @@ class FakeQuizRepository:
     def save_quiz(self, quiz: Quiz):
         self.quizzes.append(quiz)
     
-
+    def update_quiz(self, updated_quiz, old_name):
+        for quiz in self.quizzes:
+            if quiz.name == old_name:
+                self.quizzes.remove(quiz)
+        self.quizzes.append(updated_quiz)
 
 class TestManagementService(unittest.TestCase):
 

@@ -1,6 +1,6 @@
-from initialize_database import get_database_connection
 from entities.quiz import Quiz
 from entities.puzzle import Puzzle
+from initialize_database import get_database_connection
 
 class QuizRepository:
     """Luokka, joka vastaa visailuihin liittyvistä tietokantaoperaatioista."""
@@ -124,19 +124,6 @@ class QuizRepository:
 
         self._connection.commit()
 
-
-
-    def _update_quiz_name(self, name, quiz_id):
-        cursor = self._connection.cursor()
-
-        cursor.execute(
-            "UPDATE Quizzes SET name=? WHERE id=?",
-            [name,
-             quiz_id]
-        )
-
-        self._connection.commit()
-
     def update_quiz(self, updated_quiz, old_name):
 
         cursor = self._connection.cursor()
@@ -182,3 +169,12 @@ class QuizRepository:
                     puzzle.words[3],
                     puzzle.words[4]]
             )
+
+    def _update_quiz_name(self, name, quiz_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "UPDATE Quizzes SET name=? WHERE id=?",
+            [name,
+             quiz_id]
+        )

@@ -15,10 +15,6 @@ from services.edit_service import (
 )
 
 class TestEditService(unittest.TestCase):
-    """Tämä testiluokka testaa EditService-luokkaa tilanteessa, jossa 
-       käyttäjä haluaa luoda uuden visailun. Tässä tapauksessa luokan
-       suojattu atribuutti self._quiz sisältää aluksi tyhjän Quiz-olion.
-    """
 
     def setUp(self):
         self.repository  = FakeQuizRepository()
@@ -143,7 +139,7 @@ class TestEditService(unittest.TestCase):
 
     def test_save_quiz_works_if_quiz_name_changes(self):
         self.edit_service2.set_name("Testing")
-        self.edit_service2.save_quiz()
+        self.edit_service2.save_quiz()   
         
         quiz = self.repository.find_quiz("Testing")
         self.assertEqual(len(quiz.puzzles), 2)

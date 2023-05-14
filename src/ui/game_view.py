@@ -178,7 +178,13 @@ class GameView:
     def _pack_quiz_fields(self):
         for i in range(len(self._quiz_fields)):
             pad_size = self._root.winfo_screenwidth() // 60
-            self._quiz_fields[i].grid(row=0, column=i, padx=pad_size, pady=pad_size)
+            
+            self._quiz_fields[i].grid(
+                row=0, 
+                column=i, 
+                padx=pad_size, 
+                pady=pad_size
+            )
 
     def _reset_view(self):
         self._frame.destroy()

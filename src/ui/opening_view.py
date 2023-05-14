@@ -1,22 +1,24 @@
 from tkinter import ttk, constants, Listbox, messagebox, constants
-from services.management_service import management_service
+from services.management_service import ManagementService
 
 
 class OpeningView:
     """Luokka, joka vastaa ohjelman käyttöliittymän aloitusnäkymästä."""
 
-    def __init__(self, root, handle_game_view, handle_edit_view):
+    def __init__(self, root, handle_game_view, handle_edit_view, service: ManagementService):
         """Luokan konstruktori. Luo uuden aloitusnäkymän.
 
         Args:
             root: TKinter-elementti, joka sisältää ohjelman ikkunan.
             handle_game_view: Arvo, jota kutsumalla avautuu uusi pelinäkymä.
             handle_edit_view: Arvo, jota kutsumalla avautuu uusi visailujenluomisnäkymä.
+            service: Olio, joka vastaa sovelluslogiikasta.
         """
 
         self._root = root
         self._handle_game_view = handle_game_view
         self._handle_edit_view = handle_edit_view
+        self._service = service
 
         self._quiz_list = None
         self._frame = None
@@ -27,6 +29,10 @@ class OpeningView:
         """Sulkee näkymän."""
         self._frame.destroy()
 
+    def pack(self):
+        """Näyttää näkymän."""
+        self._frame.pack(fill=constants.X, padx=10, pady=10)
+
     def _get_selected_quiz_name(self):
         value = self._quiz_list.curselection()
 
@@ -35,12 +41,8 @@ class OpeningView:
         
         return self._quiz_list.get(value)
 
-    def pack(self):
-        """Näyttää näkymän."""
-        self._frame.pack(fill=constants.X, padx=10, pady=10)
-
     def _handle_delete_quiz(self):
-        self._take_action(management_service.delete_quiz)
+        self._take_action(self._service.delete_quiz)
         
         if self._quiz_list:
             self._quiz_list.destroy()
@@ -99,34 +101,14 @@ class OpeningView:
             command=self._handle_delete_quiz
         )
 
-        create_quiz_button.grid(
-            row=1, 
-            column=1, 
-            padx=10, 
-            pady=(20, 0), 
-            sticky=constants.N
-        )
-
-        modify_button.grid(
-            row=2, 
-            column=1, 
-            padx=10, 
-            pady=0, 
-            sticky=constants.N
-        )
-
-        delete_button.grid(
-            row=3, 
-            column=1, 
-            padx=10, 
-            pady=0, 
-            sticky=constants.N
-        )
+        create_quiz_button.grid(row=1, column=1, padx=10, pady=(20, 0), sticky=constants.N)
+        modify_button.grid(row=2, column=1, padx=10, pady=0, sticky=constants.N)
+        delete_button.grid(row=3, column=1, padx=10, pady=0, sticky=constants.N)
 
     def _init_quiz_list(self):
         self._quiz_list = Listbox(master=self._frame)
 
-        quiz_names = management_service.get_quiz_names()
+        quiz_names = self._service.get_quiz_names()
         for counter, quiz_name in enumerate(quiz_names):
             self._quiz_list.insert(counter, quiz_name)
 
@@ -152,5 +134,5 @@ class OpeningView:
             self._show_quiz_messagebox()
             return
 
-        selected_quiz = management_service.get_quiz(quiz_name)
+        selected_quiz = self._service.get_quiz(quiz_name)
         action_handle(selected_quiz)

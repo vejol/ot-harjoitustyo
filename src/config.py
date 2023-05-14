@@ -17,3 +17,21 @@ BLUE_IMG_FILE_PATH = os.path.join(dirname, "..", "img", BLUE_IMG_FILENAME)
 
 RED_IMG_FILENAME = os.getenv("RED_IMG_FILENAME") or "red.png"
 RED_IMG_FILE_PATH = os.path.join(dirname, "..", "img", RED_IMG_FILENAME)
+
+try:
+    NAME_CHAR_LIMIT = int(os.getenv("NAME_CHAR_LIMIT"))
+except (TypeError, ValueError):
+    NAME_CHAR_LIMIT = 100
+
+try:
+    WORD_CHAR_LIMIT = int(os.getenv("WORD_CHAR_LIMIT"))
+except (TypeError, ValueError):
+    WORD_CHAR_LIMIT = 12
+
+try:
+    RED_WORDS_COUNT = int(os.getenv("RED_WORDS_COUNT"))
+    assert RED_WORDS_COUNT < 0 and RED_WORDS_COUNT > 5
+except (AssertionError, TypeError, ValueError):
+    RED_WORDS_COUNT = 2
+
+

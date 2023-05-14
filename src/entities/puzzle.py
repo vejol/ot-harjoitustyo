@@ -21,5 +21,5 @@ class Puzzle:
         """
 
         self.name = name
-        self.words = [w.upper() for w in words]
+        self.words = [w.strip().upper() for w in words]
         self.order_no = order_no

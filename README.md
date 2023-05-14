@@ -21,6 +21,7 @@ Sovellus on suunniteltu Python-versiolla `3.8`. Vanhempien python-versioiden kan
 - [Changelog](./dokumentaatio/changelog.md)
 - [Arkkitehtuurikuvaus](./dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohje](./dokumentaatio/kayttoohje.md)
+- [Testausdokumentti](./dokumentaatio/testaus.md)
 
 ## Asennus
 
@@ -40,11 +41,6 @@ poetry run invoke build
 
 ```bash
 poetry run invoke start
-```
-
-Jos sovellusta käynnistäessä kohtaat virheen ModuleNotFoundError: No module named 'PIL', kokeile antaa seuraava komento ja anna sitten kohdan 3. komento uudestaan:
-```bash
-poetry shell
 ```
 
 ## Komentorivitoiminnot

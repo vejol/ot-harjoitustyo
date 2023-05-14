@@ -1,4 +1,5 @@
 import copy
+from config import WORD_CHAR_LIMIT, NAME_CHAR_LIMIT
 from entities.puzzle import Puzzle
 from entities.quiz import Quiz
 from repositories.quiz_repository import QuizRepository
@@ -18,6 +19,7 @@ class EditService:
             old_quiz (Quiz): Quiz-olio, joka kuvaa muokattavaa visailua. Palvelu luo tästä
                                 ensin kopion, johon muutokset tehdään siltä varalta, että 
                                 käyttäjä haluaakin peruuttaa tehdyt muutokset.
+            repository: Olio, joka vastaa tiedon pysyväistallennuksen operaatioista.
         """
         self._repository = repository
         self._old_quiz = old_quiz
@@ -69,26 +71,30 @@ class EditService:
         """Lisää luotavaan visailuun uuden arvoituksen käyttäjän syötteen perusteella.
 
         Args:
-            user_input (list): Lista, joka sisältää käyttäjän PuzzleCreationWindow-
-                               näkymässä antaman syötteen.
+            name: Lisättävän arvoituksen nimi.
+            words: Lista, joka sisältää lisättävän arvoituksen piilotettavat sanat.
         """
-        name_char_limit = 100
-        word_char_limit = 12
 
         if not name.strip():
             raise NoPuzzleNameError("Puzzle name is missing.")
-        if len(name.strip()) > name_char_limit:
-            raise PuzzleNameLenghtError(f"Puzzle name is too long (limit {name_char_limit} characters)")
+
+        if len(name.strip()) > NAME_CHAR_LIMIT:
+            raise PuzzleNameLenghtError(
+                f"Puzzle name is too long (limit {NAME_CHAR_LIMIT} characters)"
+            )
 
         for word in words:
             if not word.strip():
                 raise NoPuzzleWordError("One ore more puzzle words is missing.")
+
             if " " in word.strip():
                 raise MultipleWordsError("Only one word per a word field is allowed.")
-            char_limit = 12
-            if len(word.strip()) > word_char_limit:
-                raise PuzzleWordLenghtError(f"One ore more puzzle words are too long (limit {char_limit} characters)")
-            
+
+            if len(word.strip()) > WORD_CHAR_LIMIT:
+                raise PuzzleWordLenghtError(
+                    f"One ore more puzzle words are too long (limit {WORD_CHAR_LIMIT} characters)"
+                )
+
         puzzle = Puzzle(name, words)
         self._quiz.puzzles.append(puzzle)
 
@@ -112,9 +118,6 @@ class EditService:
         else:
             self._repository.save_quiz(self._quiz)
 
-            
-
-        
 
 class QuizExistError(Exception):
     pass

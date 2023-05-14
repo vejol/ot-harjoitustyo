@@ -1,3 +1,4 @@
+from config import RED_WORDS_COUNT
 from random import sample
 
 class GameService:
@@ -18,7 +19,7 @@ class GameService:
 
     def _initialize_puzzle(self):
         self._current_puzzle = self._quiz.puzzles.pop(0)
-        self._red_words = sample([0, 1, 2, 3, 4], 2)
+        self._red_words = sample([0, 1, 2, 3, 4], RED_WORDS_COUNT)
 
     def next_puzzle(self):
         self._initialize_puzzle()

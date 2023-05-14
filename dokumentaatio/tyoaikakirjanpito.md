@@ -33,5 +33,8 @@
 |       | 1 | Lisätty EditService-luokka
 |       | 4 | Toteutettu visailujen luomis-, muokkaus- ja poistamistoiminnot ja tarvittava tietokantalogiikka |
 | 9.5.  | 2 | Päivitetty dokumentaatiota |
-
-| Yht.  | 72 | |
+| 13.5. | 5 | Kehitetty testausta |
+|       | 3 | Luotu dokumentaatiota |
+| 14.5. | 4 | Koodin refaktorointia, kehitetty tietokantayhteyttä ja lisätty ympäristömuuttujia |
+|       | 4 | Lisätty testejä ja dokumentaatiota |
+| Yht.  | 93 | |
