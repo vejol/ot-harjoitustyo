@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Voit ladata projektin lähdekoodin menemällä ensin projektin etusivulle, valitsemalla sitten oikeanpuoleisesta palkista releases ja valitsemalla viimeisimmän releasen Assets-kohdan alta Source code.
+Voit ladata projektin lähdekoodin klikkaamalla [tästä linkistä](https://github.com/vejol/ot-harjoitustyo/releases/tag/loppupalautus) ja valitsemalla Assets-kohdan alta Source code. Jos linkki ei jostain syystä toimi, viimeisin release löytyy menemällä ensin projektin etusivulle, valitsemalla sitten oikeanpuoleisesta palkista releases ja valitsemalla Assets-kohdan alta Source code.
 
 ## Konfigurointi
 
