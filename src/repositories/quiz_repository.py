@@ -120,30 +120,65 @@ class QuizRepository:
         )
 
         quiz_id = cursor.lastrowid
-
-        for order_no, puzzle in enumerate(quiz.puzzles):
-            self._save_puzzle(order_no, puzzle, quiz_id, cursor)
+        self._save_puzzles(quiz.puzzles, quiz_id, cursor)
 
         self._connection.commit()
 
-    def _save_puzzle(self, order_no, puzzle, quiz_id, cursor):
+
+
+    def _update_quiz_name(self, name, quiz_id):
+        cursor = self._connection.cursor()
+
         cursor.execute(
-            '''INSERT INTO Puzzles (
-                    name, 
-                    order_no, 
-                    quiz_id, 
-                    word1, 
-                    word2, 
-                    word3, 
-                    word4, 
-                    word5)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-            [puzzle.name,
-                order_no,
-                quiz_id,
-                puzzle.words[0],
-                puzzle.words[1],
-                puzzle.words[2],
-                puzzle.words[3],
-                puzzle.words[4]]
+            "UPDATE Quizzes SET name=? WHERE id=?",
+            [name,
+             quiz_id]
         )
+
+        self._connection.commit()
+
+    def update_quiz(self, updated_quiz, old_name):
+
+        cursor = self._connection.cursor()
+
+        quiz_id = self._get_quiz_id(old_name, cursor)
+        self._update_quiz_name(updated_quiz.name, quiz_id)
+        self._delete_puzzles_by_quiz_id(quiz_id, cursor)
+        self._save_puzzles(updated_quiz.puzzles, quiz_id, cursor)
+
+        self._connection.commit()
+
+    def _delete_puzzles_by_quiz_id(self, quiz_id, cursor):
+        cursor.execute("DELETE FROM Puzzles WHERE (quiz_id=?)", [quiz_id])
+
+    def _get_quiz_id(self, quiz_name, cursor):
+        cursor.execute(
+            "SELECT id FROM Quizzes WHERE name=?",
+            [quiz_name]
+        )
+
+        quiz_id = cursor.fetchall()[0]["id"]
+        return quiz_id
+
+    def _save_puzzles(self, puzzles, quiz_id, cursor):
+        for order_no, puzzle in enumerate(puzzles):
+            cursor.execute(
+                '''INSERT INTO Puzzles (
+                        name, 
+                        order_no, 
+                        quiz_id, 
+                        word1, 
+                        word2, 
+                        word3, 
+                        word4, 
+                        word5)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                [puzzle.name,
+                    order_no,
+                    quiz_id,
+                    puzzle.words[0],
+                    puzzle.words[1],
+                    puzzle.words[2],
+                    puzzle.words[3],
+                    puzzle.words[4]]
+            )

@@ -106,11 +106,15 @@ class EditService:
         if not self._quiz.puzzles:
             raise NoPuzzlesError("Not allowed to save a quiz with zero puzzles.")
 
-        if self._old_quiz.name != "":
-            self._repository.delete_quiz(self._old_quiz)
 
-        self._repository.save_quiz(self._quiz)
+        if self._old_quiz.name:
+            self._repository.update_quiz(self._quiz, self._old_quiz.name)
+        else:
+            self._repository.save_quiz(self._quiz)
 
+            
+
+        
 
 class QuizExistError(Exception):
     pass
