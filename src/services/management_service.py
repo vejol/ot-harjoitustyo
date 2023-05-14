@@ -1,12 +1,15 @@
 from entities.puzzle import Puzzle
 from entities.quiz import Quiz
-from repositories.quiz_repository import QuizRepository
 
 class ManagementService:
     """Luokka, joka vastaa sovelluksen logiikasta."""
 
     def __init__(self, repository):
-        """Luokan konstruktori. Luo uuden sovelluksen logiikasta vastaavan palvelun."""
+        """Luokan konstruktori. Luo uuden sovelluksen logiikasta vastaavan palvelun.
+
+        Args:
+            repository: Olio, joka vastaa tiedon pysyväistallennukseen liittyvistä operaatioista.
+        """
         self._repository = repository
 
 
@@ -20,6 +23,11 @@ class ManagementService:
         self._repository.save_quiz(quiz)
 
     def delete_quiz(self, quiz_name):
+        """Poistaa visailun tietokannasta annetun nimen perusteella.
+
+        Args:
+            quiz_name: Merkkijono, joka kuvaa visailun nimeä.
+        """
         self._repository.delete_quiz(quiz_name)
 
 

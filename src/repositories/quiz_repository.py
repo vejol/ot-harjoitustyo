@@ -125,6 +125,13 @@ class QuizRepository:
         self._connection.commit()
 
     def update_quiz(self, updated_quiz, old_name):
+        """Päivittää annetun visailun tiedot tietokantaan.
+
+        Args:
+            updated_quiz: Päivitetty visailu Quiz-oliona.
+            old_name: Merkkijono, joka kuvaa visailun aiempaa nimeä.
+                      Tämän perusteella visailu on mahdollista löytää tietokannasta.
+        """
 
         cursor = self._connection.cursor()
 

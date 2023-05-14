@@ -29,6 +29,13 @@ class TestQuizRepository(unittest.TestCase):
         self.assertEqual(quiz1.puzzles[0].words, ["ONE", "TWO", "THREE", "FOUR", "FIVE"])
         self.assertEqual(quiz2.puzzles[0].words, ["SIX", "SEVEN", "EIGHT", "NINE", "TEN"])
 
+    def test_update_quiz(self):
+        self.repository.save_quiz(self.quiz1)
+        self.quiz1.name = "New Name"
+        self.repository.update_quiz(self.quiz1, "Test Quiz 1")
+
+        quizzes = self.repository.find_all_quizzes()
+        self.assertTrue("New Name" in quizzes)
 
     def test_delete_all(self):
         quizzes = self.repository.find_quiz_names()
@@ -59,4 +66,5 @@ class TestQuizRepository(unittest.TestCase):
         quizzes = self.repository.find_all_quizzes()
         self.assertTrue("Test Quiz 1" in quizzes)
         self.assertTrue("Test Quiz 2" in quizzes)
+
 

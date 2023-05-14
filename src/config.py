@@ -33,5 +33,3 @@ try:
     assert RED_WORDS_COUNT < 0 and RED_WORDS_COUNT > 5
 except (AssertionError, TypeError, ValueError):
     RED_WORDS_COUNT = 2
-
-

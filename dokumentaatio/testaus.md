@@ -23,7 +23,9 @@ Ohjelman QuizRepository-luokalle on käytössä omat, testejä varten luotavat t
 
 ### Testauskattavuus
 
-Sovelluksen testauskattavuus on 93%. Käyttöliittymän testaaminen on suoritettu manuaalisesti, eikä se sisälly tähän testauskattavuuteen.
+Sovelluksen testauskattavuus on 96%. Käyttöliittymän testaaminen on suoritettu manuaalisesti, eikä se sisälly tähän testauskattavuuteen.
+
+![testikattavuus](./kuvat/testikattavuus.png)
 
 Testikattavuuden ulkopuolelle jäi testattavista tiedostoista vain yksittäisiä rivejä, kuten _build.py-_ ja _initialize_database.py_-tiedostojen komentoriviltä suorittaminen.
 
