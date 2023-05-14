@@ -47,16 +47,6 @@ poetry run invoke build
 poetry run invoke start
 ```
 
-## Komentorivitoiminnot
-
-### Ohjelman suorittaminen
-
-Ohjelma suoritetaan komennolla:
-
-```bash
-poetry run invoke start
-```
-
 ## Aloitus
 Sovellus avautuu aloitusnäkymään:
 
